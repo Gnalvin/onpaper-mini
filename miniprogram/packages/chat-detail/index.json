@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "Avatar": "/components/avatar",
+    "OpButton": "/components/op-button",
+    "van-transition": "@vant/weapp/transition/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "imageItem": "/components/image-item"
+  }
+}

@@ -1,0 +1,68 @@
+<!--packages/user-home/index.wxml-->
+
+<!-- 头部导航栏 -->
+<van-nav-bar
+  fixed
+  z-index="999"
+  class="van-nav-bar {{showTopNav ? 'van-nav-bar-bgc': ''}}"
+  custom-class="custom-nav-class"
+  title="{{showTopNav?userProfile.userName:''}}"
+  title-class="custom-title-class"
+>
+  <view slot="left" class="nav-bar-left">
+    <image
+      wx:if="{{pagesCount > 1}}"
+      class="icon"
+      src="/assets/img/arrow_left{{!showTopNav ? '_white':''}}.svg"
+      mode="aspectFill"
+      bind:tap="navGoBack"
+    />
+    <image
+      wx:else
+      class="home-icon"
+      src="/assets/img/home{{!showTopNav ? '_white':''}}.svg"
+      mode="aspectFill"
+      bind:tap="navGoBack"
+    />
+  </view>
+</van-nav-bar>
+
+<!-- 资料展示 -->
+<UserHomeHead
+  profile="{{userProfile}}"
+  isFocus="{{isFocus}}"
+  isOwner="{{isOwner}}"
+  bind:focus="handleUserFoucs"
+>
+</UserHomeHead>
+
+<!-- 用户展示导航栏 -->
+<NavBar wx:if="{{userId}}" bind:choise="handleChoseNavBar"></NavBar>
+
+<!-- 内容展示 -->
+<view class="user-show">
+  <view hidden="{{nav !== 'trend'}}">
+    <block wx:for="{{trends}}" wx:key="trendId">
+      <TrendItem trend="{{item}}"></TrendItem>
+    </block>
+  </view>
+  <view class="art-wrap" hidden="{{nav !== 'artwork'}}">
+    <WaterFlow noAvatarJump id="waterFlow"></WaterFlow>
+  </view>
+  <view class="collect-wrap" hidden="{{nav !== 'collect'}}">
+    <block wx:for="{{collects}}" wx:key="artworkId">
+      <SquareArtwork artwork="{{item}}"></SquareArtwork>
+    </block>
+  </view>
+  <view wx:if="{{showEndTip && !showContentTip}}" class="end">
+    ,,Ծ‸Ծ,, 没有更多内容了</view
+  >
+</view>
+
+<!-- 没有发布过内容提示 -->
+<view class="no-login-or-content" wx:if="{{showContentTip}}">
+  <view class="no-tip">{{noContentTip}}</view>
+</view>
+
+<!-- 回到顶部 -->
+<FixButton scrollY="{{scrollY}}"></FixButton>

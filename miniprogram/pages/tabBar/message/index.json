@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "Avatar": "/components/avatar",
+    "van-loading": "@vant/weapp/loading/index",
+    "OpButton": "/components/op-button/index"
+  },
+  "navigationBarTitleText": "消息"
+}

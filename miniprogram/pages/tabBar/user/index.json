@@ -1,0 +1,14 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "UserHomeHead": "/components/user-home/user-home-head",
+    "NavBar": "/components/user-home/nav-bar",
+    "TrendItem": "/components/trend-item",
+    "OpButton": "/components/op-button/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "SquareArtwork": "/components/artwork/square",
+    "WaterFlow": "/components/water-flow",
+    "FixButton": "/components/fix-button"
+  }
+}

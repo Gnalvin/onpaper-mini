@@ -1,0 +1,45 @@
+function handleActionText(action, targetType, status) {
+  if (action == 'like') return '赞了你的'
+  if (action == 'collect') return '收藏了你的'
+  if (action == 'focus') return '开始关注你'
+  if (action == 'comment') {
+    if (targetType == 'cm') {
+      return '回复了你的'
+    } else {
+      return '评论了你的'
+    }
+  }
+  if (action == 'update') {
+    if (status === 0) return '向你发起约稿'
+    if (status === 1) return '希望与你联系'
+    if (status === 2) return '开始进行创作'
+    if (status === 3) return '完成你的企划'
+    if (status === -1) return '关闭了企划'
+    if (status === -2) return '终止了企划'
+  }
+  return ''
+}
+
+function handleTargetType(targetType) {
+  if (targetType == 'aw') return '作品'
+  if (targetType == 'tr') return '动态'
+  if (targetType == 'cm') return '评论'
+  return ''
+}
+
+function handleZeroMsgTip(notifyType){
+  var msgMap = {
+    'like': "点赞收藏",
+    'focus':"新增关注",
+    'comment':"评论相关",
+    'commission':"约稿相关"
+  }
+
+  return '还没有收到' + msgMap[notifyType] + '的通知'
+}
+
+module.exports = {
+  handleActionText: handleActionText,
+  handleTargetType: handleTargetType,
+  handleZeroMsgTip: handleZeroMsgTip
+}

@@ -1,0 +1,38 @@
+function showSmallDot(curIndex, itemIndex, allCount) {
+  // 如果小于5张 不需要显示小点
+  if (allCount < 5) return false
+
+  if (curIndex < 3 && itemIndex >= 4) return true
+  if (
+    curIndex >= 3 &&
+    curIndex < allCount - 3 &&
+    Math.abs(itemIndex - curIndex) >= 2
+  )
+    return true
+  if (curIndex >= allCount - 3 && itemIndex <= allCount - 5) return true
+  return false
+}
+
+function showCopyRight(copyRight, checkString) {
+  if (checkString.indexOf(copyRight) === -1) return false
+  return true
+}
+
+//是否可以评论
+function isCanComment(artInfo) {
+  if (
+    artInfo.comSetting === 'onlyFans' &&
+    !artInfo.isOwner &&
+    !artInfo.interact.isFocusAuthor
+  ) {
+    return false
+  } else {
+    return true
+  }
+}
+
+module.exports = {
+  showSmallDot: showSmallDot,
+  showCopyRight: showCopyRight,
+  isCanComment: isCanComment
+}

@@ -1,0 +1,21 @@
+var styleBgc = function (rank) {
+  var bgc = ''
+  switch (rank) {
+    case '1':
+      bgc = '#ff5575'
+      break
+    case '2':
+      bgc = '#ffd36a'
+      break
+    case '3':
+      bgc = '#6299ff'
+      break
+    default:
+      break
+  }
+  return bgc
+}
+
+module.exports = {
+  styleBgc: styleBgc
+}

@@ -1,0 +1,135 @@
+/* pages/tabBar/message/index.wxss */
+page {
+  background-color: var(--bgc1);
+}
+
+.no-login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .no-tip {
+    font-size: 28rpx;
+    color: var(--text-color3);
+    margin-bottom: 80rpx;
+  }
+}
+
+.notify-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50rpx;
+  margin-bottom: 50rpx;
+  .item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      width: 60rpx;
+      height: 60rpx;
+    }
+    .text {
+      font-weight: 500;
+      font-size: small;
+      margin-top: 20rpx;
+    }
+    .unread {
+      right: -6rpx;
+      top: -6rpx;
+    }
+  }
+}
+
+.chat-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 35rpx;
+  position: relative;
+  .left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    .unread {
+      right: -10rpx;
+      top: -8rpx;
+    }
+  }
+  .right {
+    margin-left: 24rpx;
+    flex-grow: 1;
+    line-height: 1.5;
+    .content {
+      display: flex;
+      flex-direction: column;
+      .text {
+        color: var(--text-color3);
+        font-size: 28rpx;
+      }
+    }
+    .name-time {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 5rpx;
+      .name {
+        font-size: 30rpx;
+        font-weight: 500;
+        color: var(--text-color1);
+      }
+      .time {
+        flex-shrink: 0;
+        color: var(--text-color3);
+        font-size: 24rpx;
+        margin-right: 10rpx;
+      }
+    }
+  }
+  &::after {
+    background-color: var(--border-color3);
+    bottom: 0;
+    content: '';
+    height: 1px;
+    left: 40rpx;
+    position: absolute;
+    right: 50rpx;
+  }
+}
+
+.no-chat {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.unread {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1;
+  background-color: #f1403c;
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 16rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  min-width: 16rpx;
+  padding: 0 8rpx;
+}
+
+.end {
+  padding: 35rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: var(--text-color3);
+}
+.loading {
+  padding: 30rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

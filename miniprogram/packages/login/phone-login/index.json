@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "OpButton": "/components/op-button/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "OtherLogin": "../cpns/change-login/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-toast": "@vant/weapp/toast/index"
+  }
+}

@@ -1,0 +1,56 @@
+/* packages/upload-artwork/subpage/cover/index.wxss */
+page {
+  height: 100vh;
+  overflow: hidden;
+  background-color: #000;
+}
+.cover-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.indicator-area {
+  padding: 40rpx 30rpx;
+  .scroll-view {
+    width: calc(100vw - 20rpx);
+    white-space: nowrap;
+    position: relative;
+    left: -20rpx;
+  }
+  .indicator-item {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: 20rpx;
+    .pic {
+      border-radius: 20rpx;
+      width: 150rpx;
+      height: 150rpx;
+    }
+  }
+  .temp-width {
+    vertical-align: middle;
+    display: inline-flex;
+    height: 70px;
+  }
+  .temp-width:last-of-type {
+    margin-right: 20rpx;
+  }
+}
+
+.next-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50rpx;
+  .cancel {
+    color: #eee;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 500;
+    font-size: 32rpx;
+  }
+}

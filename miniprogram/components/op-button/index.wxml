@@ -1,0 +1,11 @@
+<!--components/op-button/index.wxml-->
+<button
+  class="button {{btnStyle == 'white' ? 'white' :''}} {{isDisable == true ? 'disable' : ''}}"
+  size="mini"
+  style="width: {{width}};height: {{height}};line-height: {{height == 'auto' ? '2.3' : height }};font-size: {{fontSize}};font-weight: {{fontWith}};background-color: {{bgcColor}};color: {{color}} !important;"
+  catch:tap="handleTab"
+  open-type="{{openType}}"
+  bindgetphonenumber="getPhoneNumber"
+>
+  {{text}}
+</button>

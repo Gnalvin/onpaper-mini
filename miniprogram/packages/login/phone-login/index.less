@@ -1,0 +1,110 @@
+/* pages/login/phone-login/index.wxss */
+page {
+  display: flex;
+  height: 100%;
+  background-color: var(--bgc1);
+}
+
+.phone-login-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 100rpx;
+}
+
+.form {
+  font-size: 40rpx;
+  margin-top: 140rpx;
+  margin-bottom: 80rpx;
+  .icon {
+    width: 34rpx;
+    height: 34rpx;
+    padding: 10rpx;
+  }
+}
+
+.input {
+  height: 80rpx !important;
+  display: flex;
+  align-items: center;
+}
+
+.placeholder {
+  color: var(--placeholder);
+}
+
+.phone-number {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid var(--border-color1);
+  .zone {
+    display: flex;
+    font-size: 40rpx;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20rpx;
+    color: var(--text-color4);
+  }
+}
+
+.code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid var(--border-color1);
+  .send-code {
+    flex-shrink: 0;
+    max-width: 180rpx;
+    font-size: 30rpx;
+    color: var(--text-color4);
+    margin-right: 40rpx;
+  }
+  .active-color {
+    color: #409eff;
+  }
+  .retry {
+    flex-shrink: 0;
+    max-width: 240rpx;
+    font-size: 30rpx;
+    color: var(--text-color4);
+  }
+}
+
+.agreement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+  font-size: 24rpx;
+  text-align: center;
+  .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .text {
+    color: #409eff;
+  }
+}
+
+.tip {
+  text-align: center;
+  font-size: 24rpx;
+  margin-bottom: 50rpx;
+  color: var(--text-color4);
+}
+
+.no-check-tip {
+  padding: 30rpx 60rpx;
+  text-align: center;
+  font-weight: 500;
+  .text {
+    text-align: center;
+    margin: 30rpx 0 50rpx;
+    font-size: 24rpx;
+    color: #2481df;
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "UserCard": "/components/user-card/index",
+    "Tabs": "/components/tabs",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-sticky": "@vant/weapp/sticky/index"
+  },
+  "navigationBarTitleText": "画师"
+}

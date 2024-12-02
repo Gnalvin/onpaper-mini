@@ -1,0 +1,42 @@
+{
+  "name": "onpaper-miniprogram",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore typings ",
+    "prepare": "husky install",
+    "commit": "cz",
+    "switch:dev": "node switch.js --dev",
+    "switch:prod": "node switch.js --prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "@commitlint/cli": "^17.6.5",
+    "@commitlint/config-conventional": "^17.6.5",
+    "@types/crypto-js": "^4.1.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.5",
+    "@typescript-eslint/parser": "^6.7.5",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "miniprogram-api-typings": "^3.12.1",
+    "prettier": "^2.8.8"
+  },
+  "dependencies": {
+    "@vant/area-data": "^1.5.0",
+    "@vant/weapp": "^1.11.1",
+    "crypto-js": "^4.1.1",
+    "dayjs": "^1.11.8",
+    "js-base64": "^3.7.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

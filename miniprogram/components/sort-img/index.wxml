@@ -1,0 +1,42 @@
+<!--components/sort-img/index.wxml-->
+<wxs module="handle" src="./handle.wxs"></wxs>
+<wxs module="utils" src="/utils/js.wxs"></wxs>
+
+<view class="pre-img" id="sorContainer">
+  <view
+    class="img-item trans"
+    wx:for="{{urlList}}"
+    wx:key="url"
+    data-index="{{index}}"
+    list="{{urlList}}"
+    delete="{{deleteIndex}}"
+    bind:longpress="{{handle.longPress}}"
+    bind:touchmove="{{handle.touchMove }}"
+    bind:touchend="{{handle.touchEnd}}"
+    change:list="{{handle.buildSortList}}"
+    change:delete="{{handle.handleDelete}}"
+  >
+    <image class="pic" src="{{item.url}}" mode="aspectFill" />
+    <view
+      class="delete"
+      data-index="{{index}}"
+      catch:tap="onClickDeleteImg"
+      wx:if="{{showDelete || utils.indexOf(showDelIndex,index) !== -1}}"
+    >
+      <image class="icon" src="/assets/img/close_white.svg" mode="aspectFill" />
+    </view>
+    <view class="fail" wx:if="{{ utils.indexOf(showDelIndex,index) !== -1}}">
+      <image class="icon" src="/assets/img/dislike_red.svg" mode="aspectFill" />
+      <view class="tip">上传失败</view>
+    </view>
+  </view>
+  <view
+    class="img-item"
+    catch:tap="onClickAddImg"
+    style="display: {{urlList.length === 15 ? 'none': 'inline-flex'}};"
+  >
+    <view class="add">
+      <image class="icon" src="/assets/img/add_white.svg" mode="aspectFill" />
+    </view>
+  </view>
+</view>

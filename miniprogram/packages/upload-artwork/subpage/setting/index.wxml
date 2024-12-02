@@ -1,0 +1,108 @@
+<!--packages/upload-artwork/subpage/setting/index.wxml-->
+<view class="edite-area">
+  <!-- 公开范围 -->
+  <van-cell
+    size="large"
+    is-link
+    bind:click="handleShowWhoSee"
+    value-class="content-style"
+    value="{{whoSee}}"
+  >
+    <view slot="title" class="van-title">
+      <image class="icon" src="/assets/img/unlock.svg" mode="aspectFill" />
+      <view class="text">公开范围</view>
+    </view>
+  </van-cell>
+  <!-- 评论权限 -->
+  <van-cell
+    size="large"
+    is-link
+    bind:click="handleShowComment"
+    value-class="content-style"
+    value="{{comment}}"
+  >
+    <view slot="title" class="van-title">
+      <image
+        class="icon"
+        src="/assets/img/message-privacy.svg"
+        mode="aspectFill"
+      />
+      <view class="text">评论权限</view>
+    </view>
+  </van-cell>
+  <!-- 版权许可 -->
+  <van-cell
+    size="large"
+    is-link
+    center
+    bind:click="handleShowCopyright"
+    value-class="content-style"
+    use-label-slot
+  >
+    <view slot="title" class="van-title" catch:tap="showCopyrightTip">
+      <image class="icon" src="/assets/img/copyright.svg" mode="aspectFill" />
+      <view class="text">版权许可</view>
+      <van-icon style="margin-left: 10rpx" name="question" />
+    </view>
+    <view class="van-title" slot="label" catch:tap="showCopyrightTip">
+      <view>{{copyright}}</view>
+    </view>
+  </van-cell>
+  <!-- 未成年内容 -->
+  <van-cell size="large" value-class="content-style" center>
+    <view slot="title" class="van-title" catch:tap="showAdultTip">
+      <image class="icon" src="/assets/img/forbid.svg" mode="aspectFill" />
+      <view class="text">含未成年敏感内容</view>
+      <van-icon style="margin-left: 10rpx" name="question" />
+    </view>
+    <view style="display: flex" slot="right-icon">
+      <van-switch
+        style="display: flex; margin-right: 10rpx"
+        size="20px"
+        checked="{{ adult }}"
+        bind:change="changeAdult"
+      />
+    </view>
+  </van-cell>
+</view>
+
+<!-- 选择公开范围弹窗 -->
+<van-popup show="{{isShowPublic}}" position="bottom" round>
+  <van-picker
+    title="公开范围"
+    show-toolbar
+    columns="{{ whoSeeSetting}}"
+    bind:cancel="handleShowWhoSee"
+    bind:confirm="changeWhoSee"
+  />
+</van-popup>
+
+<!-- 选择评论权限弹窗 -->
+<van-popup show="{{isShowComment}}" position="bottom" round>
+  <van-picker
+    title="公开范围"
+    show-toolbar
+    columns="{{ commentSetting}}"
+    bind:cancel="handleShowComment"
+    bind:confirm="changeComment"
+  />
+</van-popup>
+
+<!-- 选择版权弹窗 -->
+<van-popup show="{{isShowCopyright}}" position="bottom" round>
+  <van-picker
+    title="版权许可"
+    show-toolbar
+    columns="{{ copyrightSetting}}"
+    bind:cancel="handleShowCopyright"
+    bind:confirm="changeCopyright"
+  />
+</van-popup>
+
+<!-- 消息提示 -->
+<van-dialog
+  id="van-dialog"
+  confirm-button-class="vant-button"
+  custom-class="vant-custom"
+>
+</van-dialog>

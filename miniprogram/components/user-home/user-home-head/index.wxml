@@ -1,0 +1,103 @@
+<!--components/user-home/index.wxml-->
+<wxs src="../../../utils/format.wxs" module="fmt" />
+
+<view class="user-home-head">
+  <!-- 背景封面 -->
+  <image class="banner" src="{{profile.bannerName}}" mode="aspectFill" />
+  <!-- 用户资料 -->
+  <view class="user-profile">
+    <!-- 头像和统计 -->
+    <view class="avatar-count">
+      <view class="avatar-item">
+        <Avatar
+          class="avatar"
+          avatarName="{{profile.avatarName ? profile.avatarName : ''}}"
+          uid="{{profile.userId ? profile.userId : ''}}"
+          showLogo="{{!profile.userId}}"
+          noJump
+        ></Avatar>
+      </view>
+      <view class="count">
+        <view
+          class="count-item"
+          bind:tap="handleGoToFans"
+          data-type="following"
+        >
+          <text class="num">{{fmt.formatNum(profile.count.following)}}</text>
+          <text class="text">关注</text>
+        </view>
+        <view class="count-item" bind:tap="handleGoToFans" data-type="follower">
+          <text class="num">{{fmt.formatNum(profile.count.fans)}}</text>
+          <text class="text">粉丝</text>
+        </view>
+        <view class="count-item">
+          <text class="num">{{fmt.formatNum(profile.count.likes)}}</text>
+          <text class="text">获赞</text>
+        </view>
+      </view>
+    </view>
+    <!-- 昵称和设置 -->
+    <view class="name-handle" wx:if="{{profile.userId}}">
+      <span class="name one-line">{{profile.userName}}</span>
+      <view class="handle" wx:if="{{isOwner}}">
+        <view class="edit-profile" bind:tap="handleEditProfile">编辑资料</view>
+        <view class="icon-wrap" bind:tap="handleSetting">
+          <image
+            class="icon"
+            src="../../../assets/img/setting.svg"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+      <view class="handle" wx:else>
+        <OpButton
+          style="display: inline-flex"
+          text="{{isFocus ? '已关注':'关注'}}"
+          btnStyle="{{isFocus ? 'white':''}}"
+          width="140rpx"
+          bind:click="handleFoucsUser"
+          login
+        ></OpButton>
+        <view class="icon-wrap" catch:tap="handleGoToChat">
+          <image
+            class="icon"
+            src="../../../assets/img/mail.svg"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+    </view>
+    <!-- 简介 -->
+    <view
+      class="describe-more"
+      wx:if="{{profile.userId}}"
+      bind:tap="goToShowMore"
+    >
+      <span class="describe one-line">{{profile.introduce}}</span>
+      <view class="more">
+        <span>更多</span>
+        <image
+          class="icon"
+          src="../../../assets/img/arrow_right.svg"
+          mode="aspectFill"
+        />
+      </view>
+    </view>
+    <!-- 标签 -->
+    <view class="v-status" wx:if="{{profile.vStatus}}">
+      <image
+        wx:if="{{profile.vStatus == 1}}"
+        class="icon"
+        src="../../../assets/img/v_tag_user.svg"
+        mode="aspectFill"
+      ></image>
+      <image
+        wx:else
+        class="icon"
+        src="../../../assets/img/v_tag_org.svg"
+        mode="aspectFill"
+      ></image>
+      <text class="tag"> {{ profile.vTag }}</text>
+    </view>
+  </view>
+</view>

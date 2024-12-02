@@ -1,0 +1,128 @@
+<!--components/trend-item/index.wxml-->
+
+<wxs src="./index.wxs" module="utils" />
+
+<view class="trend-item" wx:if="{{utils.isShowTrend(trend,isInDetail)}}">
+  <!-- 头像和名字时间 -->
+  <view class="header">
+    <Avatar
+      class="avatar"
+      wx:if="{{trend.userId}}"
+      avatarName="{{trend.avatar}}"
+      uid="{{trend.userId}}"
+      width="90rpx"
+    ></Avatar>
+    <view class="nick-time-other">
+      <view class="nick-time">
+        <view class="nick">
+          <view class="one-line" catch:tap="goToUseHome"
+            >{{trend.userName}}</view
+          >
+          <!-- 标签 -->
+          <view class="v-status" wx:if="{{trend.vStatus}}">
+            <image
+              wx:if="{{trend.vStatus == 1}}"
+              class="icon"
+              src="/assets/img/v_tag_user.svg"
+              mode="aspectFill"
+            ></image>
+            <image
+              wx:else
+              class="icon"
+              src="/assets/img/v_tag_org.svg"
+              mode="aspectFill"
+            ></image>
+          </view>
+        </view>
+        <!-- 不要动下面的格式 不然样式会乱 -->
+        <text class="time" decode
+          >{{trend.createAt}} &nbsp;·&nbsp;{{ trend.type == 'aw' ? '投稿作品' :
+          '发布动态'}}{{trend.whoSee === 'privacy'?
+          '&nbsp;·&nbsp;仅自己可见':''}}{{trend.whoSee === 'onlyFans'?
+          '&nbsp;·&nbsp;仅粉丝可见':''}}</text
+        >
+      </view>
+      <view class="other">
+        <OpButton
+          class="btn"
+          wx:if="{{!trend.isOwner && isInDetail}}"
+          text="{{trend.interact.isFocusAuthor ? '已关注':'关注'}}"
+          btnStyle="{{trend.interact.isFocusAuthor ? 'white':''}}"
+          width="130rpx"
+          bind:click="handleFocusUser"
+          login
+        ></OpButton>
+        <view class="handle" bind:tap="handleShowMenu">
+          <image
+            lazy-load
+            class="icon"
+            src="../../assets/img/arrow_down.svg"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 内容 -->
+  <view class="body" bind:tap="goToDeatil">
+    <block wx:if="{{trend.type == 'tr' && trend.topic.topicId}}">
+      <view class="topic">
+        <image class="icon" src="../../assets/img/topic.svg"></image>
+        <view class="topic-text">{{ trend.topic.text }}</view>
+      </view>
+    </block>
+    <view
+      class="describe-wrap {{isShowTwoLine  ?'reset-describe':''}}"
+      style="{{isInDetail ? 'max-height: none;':''}}"
+    >
+      <view class="describe {{isShowTwoLine  ? 'three-line' : ''}}">
+        <view wx:if="{{trend.intro}}">{{trend.intro}}</view>
+        <view wx:elif="{{trend.forward && !trend.intro}}">转发动态</view>
+      </view>
+    </view>
+    <view class="show-all" wx:if="{{isShowTwoLine}}">全文</view>
+    <ImgWrap
+      class="img-contarner"
+      wx:if="{{trend.pics.length}}"
+      pics="{{trend.pics}}"
+      isInDetail="{{isInDetail}}"
+    ></ImgWrap>
+    <Forward wx:if="{{trend.forward}}" forward="{{trend.forward}}"></Forward>
+  </view>
+  <!-- 点赞转发 -->
+  <view class="footer">
+    <view class="forward item" wx:if="{{trend.whoSee === 'public'}}">
+      <image class="icon" src="../../assets/img/share.svg" mode="aspectFill" />
+      <view class="count" wx:if="{{trend.count.forwards}}">
+        {{trend.count.forwards}}
+      </view>
+    </view>
+    <view class="comment item" bind:tap="handleComment">
+      <image
+        class="icon"
+        src="../../assets/img/comment_normal.svg"
+        mode="aspectFill"
+      />
+      <view class="count" wx:if="{{trend.count.comments}}">
+        {{trend.count.comments}}
+      </view>
+    </view>
+    <view class="like item" bind:tap="postLikeAction">
+      <image
+        wx:if="{{trend.interact.isLike}}"
+        class="icon"
+        src="../../assets/img/like_active.svg"
+        mode="aspectFill"
+      />
+      <image
+        wx:else
+        class="icon"
+        src="../../assets/img/like_normal.svg"
+        mode="aspectFill"
+      />
+      <view class="count" wx:if="{{trend.count.likes}}">
+        {{trend.count.likes}}
+      </view>
+    </view>
+  </view>
+</view>

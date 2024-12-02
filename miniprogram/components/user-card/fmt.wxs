@@ -1,0 +1,13 @@
+function formtOptText(isFocus) {
+  if (isFocus === 1) {
+    return '已关注'
+  } else if (isFocus === 2) {
+    return '相互关注'
+  } else {
+    return '关注'
+  }
+}
+
+module.exports = {
+  formtOptText: formtOptText
+}

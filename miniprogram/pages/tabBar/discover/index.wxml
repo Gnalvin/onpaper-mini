@@ -1,0 +1,107 @@
+<!--pages/tabBar/discover/index.wxml-->
+<scroll-view
+  wx:if="{{!networkError}}"
+  id="scrollview"
+  style="height: 100vh"
+  bindrefresherrefresh="handleScrollViewRefresh"
+  bind:scrolltolower="onScrolltolower"
+  refresher-enabled
+  refresher-triggered="{{isRefresh}}"
+  scroll-y
+  enhanced
+  refresher-threshold="80"
+  refresher-default-style="none"
+  show-scrollbar="{{false}}"
+>
+  <view slot="refresher" class="loading">
+    <van-loading color="var(--text-color2)" size="30rpx" />
+  </view>
+  <!-- 分类导航 -->
+  <view class="category">
+    <view class="item">
+      <view
+        class="img-wrap zone"
+        bind:tap="goToNavPage"
+        data-page="DiscoverZone"
+      >
+        <image class="icon" src="./img/zone.svg" mode="aspectFill" />
+      </view>
+      <view>分区</view>
+    </view>
+    <view class="item">
+      <view
+        class="img-wrap rank"
+        bind:tap="goToNavPage"
+        data-page="DiscoverRank"
+      >
+        <image class="icon" src="./img/ranking.svg" mode="aspectFill" />
+      </view>
+      <view>榜单</view>
+    </view>
+    <view class="item" bind:tap="goToNavPage" data-page="DiscoverTody">
+      <view class="img-wrap today">
+        <image class="icon" src="./img/lightning.svg" mode="aspectFill" />
+      </view>
+      <view>今日</view>
+    </view>
+    <view class="item" bind:tap="goToNavPage" data-page="DiscoverArtist">
+      <view class="img-wrap artist">
+        <image class="icon" src="./img/people.svg" mode="aspectFill" />
+      </view>
+      <view>画师</view>
+    </view>
+  </view>
+  <!-- 热门标签 -->
+  <view class="hot-tag">
+    <text class="title">热门标签</text>
+    <view class="tags">
+      <block wx:for="{{hotTag}}" wx:key="tagId">
+        <view
+          class="tag-item"
+          bind:tap="goToTagPage"
+          data-id="{{item.tagId}}"
+          data-name="{{item.tagName}}"
+        >
+          <view class="one-line">{{item.tagName}}</view>
+          <view class="status">
+            <view class="new" wx:if="{{item.status === 'new'}}">新</view>
+            <image
+              wx:elif="{{item.status === 'up'}}"
+              class="icon"
+              src="/assets/img/up_red.svg"
+              mode="aspectFill"
+            />
+            <image
+              wx:elif="{{item.status === 'down'}}"
+              class="icon"
+              src="/assets/img/down_green.svg"
+              mode="aspectFill"
+            />
+            <view class="hot" wx:elif="{{item.status === 'keep'}}">热</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 动态展示 -->
+  <view class="show-trend">
+    <block wx:for="{{trends}}" wx:key="id">
+      <TrendItem trend="{{item}}"></TrendItem>
+    </block>
+  </view>
+
+  <view class="loading">
+    <van-loading color="var(--text-color2)" size="30rpx" />
+  </view>
+</scroll-view>
+
+<!-- 网络请求错误提示 -->
+<view class="networkerror" wx:else>
+  <view style="margin-top: 20rpx">糟糕出错了... (⋟﹏⋞) </view>
+  <OpButton
+    style="margin-top: 40rpx"
+    height="70rpx"
+    text="重试"
+    bind:click="reTryAllRequest"
+  ></OpButton>
+</view>

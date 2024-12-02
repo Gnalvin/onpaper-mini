@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "WaterFlow": "/components/water-flow",
+    "UserCard": "/components/user-card/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "FixButton": "/components/fix-button"
+  }
+}

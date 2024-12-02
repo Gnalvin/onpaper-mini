@@ -1,0 +1,47 @@
+<!--components/artwork/rectangle/index.wxml-->
+<wxs src="../../../utils/format.wxs" module="fmt" />
+
+<view class="rectangle-item">
+  <imageItem
+    wx:if="{{artwork.firstPic}}"
+    image-class="pic"
+    style="width: {{artwork.width}}px;height: {{artwork.height}}px;"
+    src="{{artwork.firstPic}}"
+    mode="aspectFill"
+    bind:tap="goToDetail"
+  ></imageItem>
+  <view class="footer">
+    <view bind:tap="goToDetail" class="title text-hidden two-line">
+      {{artwork.title}}
+    </view>
+    <view class="author-wrapper">
+      <view class="avatar">
+        <Avatar
+          class="avatar"
+          avatarName="{{artwork.userAvatar || '' }}"
+          uid="{{artwork.userId || ''}}"
+          width="48rpx"
+          noJump="{{noAvatarJump}}"
+        ></Avatar>
+        <view class="name text-hidden one-line" catch:tap="goToDetail"
+          >{{artwork.userName}}</view
+        >
+      </view>
+      <view class="like-wrapper" catch:tap="postLikeAction">
+        <image
+          wx:if="{{artwork.isLike}}"
+          class="icon"
+          src="/assets/img/like_active.svg"
+          mode="aspectFill"
+        />
+        <image
+          wx:else
+          class="icon"
+          src="/assets/img/like_normal.svg"
+          mode="aspectFill"
+        />
+        <view wx:if="{{artwork.likes}}">{{fmt.formatNum(artwork.likes)}}</view>
+      </view>
+    </view>
+  </view>
+</view>

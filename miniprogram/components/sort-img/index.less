@@ -1,0 +1,102 @@
+/* components/sort-img/index.wxss */
+.pre-img {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+.img-item {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  .add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220rpx;
+    height: 220rpx;
+    margin: 5rpx;
+    background-color: #eaedf5;
+    box-sizing: border-box;
+    border: 2rpx solid var(--border-color1);
+    border-radius: 20rpx;
+    .icon {
+      width: 60rpx;
+      height: 60rpx;
+    }
+  }
+  .pic {
+    position: relative;
+    border-radius: 10rpx;
+    width: 220rpx;
+    height: 220rpx;
+    margin: 5rpx;
+    box-sizing: border-box;
+    &::after {
+      content: '';
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.02);
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+  }
+  .delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35rpx;
+    height: 35rpx;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    border: none;
+    right: 20rpx;
+    top: 8rpx;
+    z-index: 9;
+    .icon {
+      width: 25rpx;
+      height: 25rpx;
+    }
+  }
+  .fail {
+    position: absolute;
+    top: 5rpx;
+    bottom: 5rpx;
+    right: 5rpx;
+    left: 5rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10rpx;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.4);
+    .icon {
+      width: 70rpx;
+      height: 70rpx;
+    }
+    .tip {
+      margin-top: 10rpx;
+      font-size: 28rpx;
+      font-weight: 500;
+      text-align: center;
+      color: #f6495f;
+    }
+  }
+}
+
+.moving {
+  z-index: 9;
+}
+
+.trans {
+  transition: all 200ms ease;
+}

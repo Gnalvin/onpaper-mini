@@ -1,0 +1,16 @@
+//是否可以评论
+function isCanComment(trendInfo) {
+  if (
+    trendInfo.comment === 'onlyFans' &&
+    !trendInfo.isOwner &&
+    !trendInfo.interact.isFocusAuthor
+  ) {
+    return false
+  } else {
+    return true
+  }
+}
+
+module.exports = {
+  isCanComment: isCanComment
+}

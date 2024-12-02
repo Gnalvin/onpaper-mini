@@ -1,0 +1,54 @@
+<!--components/fix-button/index.wxml-->
+
+<van-transition show="{{isShowBtn && btnType === 'toTop'}}">
+  <view
+    class="btn-wrapper"
+    bind:tap="handleToTop"
+    style="bottom: {{bottom}};right: {{right}};"
+  >
+    <image class="icon" src="./img/arrow_up.svg" mode="aspectFill" />
+  </view>
+</van-transition>
+
+<van-transition show="{{btnType === 'upload'}}">
+  <view
+    class="btn-wrapper upload"
+    bind:tap="handleShowUpload"
+    style="bottom: {{bottom}};right: {{right}};"
+  >
+    <image class="icon" src="/assets/img/add_white.svg" mode="aspectFill" />
+  </view>
+</van-transition>
+
+<van-overlay
+  show="{{ isShowOverlay }}"
+  lock-scroll
+  bind:click="onClickHideOverlay"
+>
+  <view class="chose-upload-wrapper">
+    <view class="container" style="margin-top: 260rpx">
+      <view class="item" bind:tap="gotoUploadArtwork">
+        <image
+          class="icon"
+          src="/assets/img/picture-one.svg"
+          mode="aspectFill"
+        />
+        <view class="tip">
+          <view class="header">发布作品</view>
+          <view class="bottom">展示完成度高的创作</view>
+        </view>
+      </view>
+      <view class="item" bind:tap="gotoUploadTrend" style="margin-bottom: 0">
+        <image
+          class="icon"
+          src="/assets/img/share_heart.svg"
+          mode="aspectFill"
+        />
+        <view class="tip">
+          <view class="header">发布动态</view>
+          <view class="bottom">分享日常创作的感想</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</van-overlay>

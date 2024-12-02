@@ -1,0 +1,6 @@
+<!--components/indicator/index.wxml-->
+<view class="indicator">
+  <view class="content" style="transform: translate({{translate}}px);">
+    <slot></slot>
+  </view>
+</view>

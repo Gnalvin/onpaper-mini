@@ -1,0 +1,14 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "WaterFlow": "/components/water-flow",
+    "FixButton": "/components/fix-button",
+    "van-loading": "@vant/weapp/loading/index",
+    "OpButton": "/components/op-button/index",
+    "TrendItem": "/components/trend-item",
+    "UserCard": "/components/user-card/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index",
+    "Tabs": "/components/tabs"
+  }
+}

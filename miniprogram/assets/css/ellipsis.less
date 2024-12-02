@@ -1,0 +1,20 @@
+.multi-line (@lines) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-line-clamp: @lines;
+  -webkit-box-orient: vertical;
+}
+
+.one-line {
+  .multi-line(1);
+}
+
+.multi-line--l2 {
+  .multi-line(2);
+}
+
+.multi-line--l3 {
+  .multi-line(3);
+}

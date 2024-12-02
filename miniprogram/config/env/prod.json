@@ -1,0 +1,20 @@
+{
+  "environment": "prod",
+  "BASE_URL": "https://api.onpaper.cn",
+
+  "OSS_PREVIEW_URL": "https://imgp.onpaper.cn/",
+  "OSS_PREVIEW_ORIGINAL_URL": "https://onpaper-img-preview.oss-cn-hangzhou.aliyuncs.com/",
+  "OSS_ORIGINAL_URL": "https://imgo.onpaper.cn/",
+  "OSS_TEMP_URL": "https://imgt.onpaper.cn/",
+
+  "OSS_ORIGINAL_BUCKET": "onpaper-img-original",
+  "OSS_PREVIEW_BUCKET": "onpaper-img-preview",
+  "OSS_TEMP_BUCKET": "onpaper-img-temp",
+
+  "OSS_REGION": "oss-cn-hangzhou",
+
+  "DEFAULT_AVATAR": "assets/default_avatar.svg",
+  "NO_LOGIN_AVATAR": "assets/no_login_avatar.jpg/webp",
+
+  "MD5_SIGN": "72b729eed6dea2cc44c1dcebd0d98909a9f5b556"
+}

@@ -1,0 +1,31 @@
+/* pages/edit-profile/subpage/introduce/index.wxss */
+.input-wrapper {
+  display: flex;
+  position: relative;
+  margin: 60rpx 30rpx 30rpx;
+  background-color: white;
+  border-radius: 20rpx;
+  textarea {
+    flex: 1;
+    min-height: 512rpx;
+    max-height: 788rpx;
+    padding: 30rpx 20rpx 50rpx;
+    /* 设置 min-height 是为了设置 textarea 的高度 */
+    /* 因为行内样式优先级比较高，所以曲线救国 */
+    font-size: 32rpx;
+    line-height: 32rpx;
+  }
+  .max-tip {
+    position: absolute;
+    right: 20rpx;
+    bottom: 10rpx;
+    font-size: 24rpx;
+    color: var(--text-color3);
+  }
+}
+
+.save-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 60rpx;
+}

@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "Avatar": "/components/avatar",
+    "OpButton": "/components/op-button",
+    "SquareArtwork": "/components/artwork/square"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "cropper": "/components/cropper/index",
+    "van-toast": "@vant/weapp/toast/index"
+  },
+  "disableScroll": true,
+  "navigationBarTitleText": "编辑头像"
+}

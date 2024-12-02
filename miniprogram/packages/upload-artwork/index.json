@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "van-transition": "@vant/weapp/transition/index",
+    "OpButton": "/components/op-button",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-dialog": "@vant/weapp/dialog/index"
+  },
+  "navigationBarTitleText": "上传作品",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#000"
+}

@@ -1,0 +1,15 @@
+<!--pages/edit-profile/subpage/avatar/index.wxml-->
+<view style="width: 100%; height: 100vh">
+  <cropper id="image-cropper"></cropper>
+</view>
+<view class="footer">
+  <button bindtap="chooseImg" style="text-align: left; padding-left: 100rpx">
+    重新选择
+  </button>
+  <button bindtap="upload" style="text-align: right; padding-right: 100rpx">
+    确定
+  </button>
+</view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

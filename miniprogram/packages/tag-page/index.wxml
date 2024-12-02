@@ -1,0 +1,50 @@
+<!--packages/tag-page/index.wxml-->
+
+<view class="head-area">
+  <view class="cover">#</view>
+  <view class="info">
+    <view class="tag-name"> #{{ tagName }} </view>
+    <view class="total"> {{ totalCount }} 个作品 </view>
+  </view>
+</view>
+
+<view class="nav-bar">
+  <view
+    style="margin-right: 40rpx"
+    class="item {{nav === 'art'?'active':''}}"
+    data-chose="art"
+    bind:tap="handleNavChose"
+  >
+    作品
+  </view>
+  <view
+    class="item {{nav === 'user'?'active':''}}"
+    data-chose="user"
+    bind:tap="handleNavChose"
+  >
+    画师
+  </view>
+  <view class="sort" bind:tap="handleNavSort" wx:if="{{nav === 'art'}}">
+    <view hidden="{{sort !== 'score'}}">最热 </view>
+    <view hidden="{{sort !== 'time'}}">最新 </view>
+    <image class="icon" src="/assets/img/sort_gray.svg" mode="aspectFill" />
+  </view>
+</view>
+
+<view class="main-area">
+  <view class="art-wrap" hidden="{{nav !== 'art'}}">
+    <WaterFlow id="waterFlow"></WaterFlow>
+    <view wx:if="{{page > 10}}" class="end"> - The End -</view>
+    <view wx:else class="loading">
+      <van-loading color="var(--text-color2)" size="30rpx" />
+    </view>
+  </view>
+  <view class="user-warp" hidden="{{nav !== 'user'}}">
+    <block wx:for="{{users}}" wx:key="userId">
+      <UserCard userInfo="{{item}}" loginUser="{{loginId}}"></UserCard>
+    </block>
+  </view>
+</view>
+
+<!-- 回到顶部 -->
+<FixButton scrollY="{{scrollY}}"></FixButton>

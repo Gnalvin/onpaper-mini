@@ -1,0 +1,57 @@
+<!--components/user-card/small-card/index.wxml-->
+<wxs src="../../../utils/format.wxs" module="fmt" />
+<wxs src="../fmt.wxs" module="fmt2" />
+
+<view class="user-info" catch:tap="handleGoToUserHome">
+  <Avatar
+    style="display: flex"
+    class="avatar"
+    avatarName="{{userInfo.avatar ? userInfo.avatar  : ''}}"
+    uid="{{userInfo.userId ? userInfo.userId : ''}}"
+    width="115rpx"
+  ></Avatar>
+  <view class="name-data">
+    <view class="name-wrapper">
+      <view class="name one-line" bind:tap="handleGoToUserHome">
+        {{userInfo.userName}}
+      </view>
+      <!-- 标签 -->
+      <view class="v-status" wx:if="{{userInfo.vStatus}}">
+        <image
+          wx:if="{{userInfo.vStatus == 1}}"
+          class="icon"
+          src="/assets/img/v_tag_user.svg"
+          mode="aspectFill"
+        ></image>
+        <image
+          wx:else
+          class="icon"
+          src="/assets/img/v_tag_org.svg"
+          mode="aspectFill"
+        ></image>
+      </view>
+    </view>
+    <!-- 简介 -->
+    <view class="intro">
+      <view class="one-line"
+        >{{userInfo.introduce ? userInfo.introduce :'暂无简介'}}</view
+      >
+    </view>
+    <!-- 统计数据 -->
+    <view class="data">
+      <text class="likes">{{fmt.formatNum(userInfo.count.likes)}} 喜欢</text>
+      <text class="fans">{{fmt.formatNum(userInfo.count.fans)}} 粉丝</text>
+    </view>
+  </view>
+  <view class="focus">
+    <OpButton
+      wx:if="{{userInfo.userId !== loginUser}}"
+      class="btn"
+      text="{{fmt2.formtOptText(userInfo.isFocus)}}"
+      btnStyle="{{userInfo.isFocus ? 'white':''}}"
+      width="140rpx"
+      bind:click="handleFocusUser"
+      login
+    ></OpButton>
+  </view>
+</view>

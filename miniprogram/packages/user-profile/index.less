@@ -1,0 +1,45 @@
+/* packages/user-profile/index.wxss */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50rpx;
+}
+.area-wrap {
+  margin: 30rpx 40rpx;
+  padding: 20rpx 30rpx;
+  border-radius: 14rpx;
+  background-color: #fff;
+  .title {
+    color: var(--text-color1);
+    font-weight: 500;
+    font-size: 36rpx;
+    padding-bottom: 10rpx;
+    .tip {
+      margin-left: 20rpx;
+      color: var(--text-color3);
+      font-size: 24rpx;
+    }
+  }
+  .item {
+    display: flex;
+    margin-bottom: 10rpx;
+    padding: 20rpx 0;
+    border-bottom: 1px solid var(--border-color1);
+    .label {
+      display: flex;
+      align-items: center;
+      width: 200rpx;
+      color: var(--text-color3);
+    }
+    .text {
+      width: 390rpx;
+      color: var(--color-regular);
+    }
+    &:last-child {
+      border: none !important;
+    }
+  }
+  .intro {
+    color: var(--color-regular);
+  }
+}

@@ -1,0 +1,110 @@
+<!--components/comment-input/index.wxml-->
+<wxs src="../../utils/format.wxs" module="fmt" />
+
+<view class="comment-input-item">
+  <view class="comment-input {{isFocus?'align-items':''}}">
+    <Avatar
+      style="display: flex"
+      wx:if="{{isInDetailPage}}"
+      avatarName="{{loginUser.avatar}}"
+      uid="{{loginUser.userId}}"
+      width="70rpx"
+    ></Avatar>
+    <textarea
+      wx:if="{{!disablePlaceholder}}"
+      style="height: {{isFocus ? '' :'40rpx'}}"
+      fixed
+      class="weui-input"
+      value="{{commentText}}"
+      placeholder="{{replyCommentInfo.replyUserName? '回复 @'+replyCommentInfo.replyUserName :placeholder}}"
+      adjust-position="{{false}}"
+      bindfocus="handleInputFocus"
+      bindblur="handleInputBlur"
+      bindconfirm="handleSaveComment"
+      bindinput="handleInput"
+      bind:tap="verifyIsLogin"
+      show-confirm-bar="{{false}}"
+      confirm-type="send"
+      maxlength="140"
+      disable-default-padding
+      focus="{{isFocus}}"
+      auto-height="{{isFocus}}"
+      disabled="{{!loginUser.userId}}"
+      hold-keyboard
+    ></textarea>
+    <textarea
+      wx:else
+      disabled
+      auto-height
+      disable-default-padding
+      class="weui-input"
+      placeholder="{{disablePlaceholder}}"
+    ></textarea>
+    <OpButton
+      style="margin: auto 0 0; display: {{!isFocus?'none':'flex'}}"
+      text="发送"
+      width="140rpx"
+      fontSize="32rpx"
+      fontWith="500"
+      bind:click="handleSaveComment"
+    ></OpButton>
+    <view class="handle-wrapper">
+      <block wx:if="{{!isFocus && !isInDetailPage}}">
+        <view class="item" bind:tap="postLike">
+          <image
+            wx:if="{{interact.isLike}}"
+            class="icon"
+            src="/assets/img/like_active.svg"
+            mode="aspectFill"
+          />
+          <image
+            wx:else
+            class="icon"
+            src="/assets/img/like_normal_light_black.svg"
+            mode="aspectFill"
+          />
+          <view class="count">{{likes ? fmt.formatNum(likes) : '点赞'}}</view>
+        </view>
+        <view class="item" wx:if="{{ownType == 'aw'}}" bind:tap="postCollect">
+          <image
+            wx:if="{{interact.isCollect}}"
+            class="icon"
+            src="/assets/img/collect_active.svg"
+            mode="aspectFill"
+          />
+          <image
+            wx:else
+            class="icon"
+            src="/assets/img/collect_normal_black.svg"
+            mode="aspectFill"
+          />
+          <view class="count"
+            >{{collects ? fmt.formatNum(collects) : '收藏'}}</view
+          >
+        </view>
+        <view class="item" bind:tap="focus">
+          <image
+            class="icon"
+            src="/assets/img/comment-emoji.svg"
+            mode="aspectFill"
+          />
+          <view class="count"
+            >{{comments ? fmt.formatNum(comments) : '评论'}}</view
+          >
+        </view>
+      </block>
+    </view>
+  </view>
+  <view
+    class="{{isFocus? 'temp-view' :''}}"
+    style="height: {{keyboardHeight + safeBottomHight}}px;background-color: #fff;"
+  ></view>
+</view>
+
+<!-- 遮罩层 -->
+<van-overlay
+  custom-class="custom-overlay"
+  root-portal
+  show="{{ isFocus }}"
+  bind:click="handleInputBlur"
+/>

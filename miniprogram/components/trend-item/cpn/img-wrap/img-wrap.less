@@ -1,0 +1,124 @@
+/* components/trend-item/cpn/img-wrap.wxss */
+.img-show {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 3px;
+  .img {
+    border-radius: 8rpx;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.img-wrap {
+  position: relative;
+  overflow: hidden;
+  width: 360rpx;
+  height: 480rpx;
+  .more {
+    color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.one-img {
+  grid-template-columns: repeat(1, 1fr);
+  max-height: 500rpx;
+  max-width: 600rpx;
+  .img-wrap {
+    width: auto;
+    height: auto;
+    &::after {
+      content: '';
+      display: none;
+      width: 100%;
+      padding-bottom: 75%;
+    }
+    .img {
+      position: relative;
+    }
+  }
+}
+
+.two-column-img {
+  grid-template-columns: repeat(2, 1fr);
+  width: 100%;
+  .img-wrap {
+    width: auto;
+    height: auto;
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  }
+}
+
+.three-column-img {
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  .img-wrap {
+    width: auto;
+    height: auto;
+    &::after {
+      content: '';
+      display: block;
+      width: 100%;
+      padding-bottom: 100%;
+    }
+  }
+}
+
+.one-img-wrap {
+  position: relative;
+  width: 100%;
+  .long-tip {
+    display: none;
+  }
+}
+
+.one-limit {
+  position: relative;
+  max-height: 400rpx;
+  overflow: hidden;
+  .long-tip {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    color: #eee;
+    padding: 2rpx 5rpx;
+    font-size: 20rpx;
+    font-weight: 500;
+    border-radius: 5rpx;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.img {
+  position: relative;
+  &::after {
+    content: '';
+    top: 0;
+    left: 0;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.02);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 10rpx;
+  }
+}

@@ -1,0 +1,129 @@
+/* pages/tabBar/discover/index.wxss */
+
+.category {
+  display: flex;
+  justify-content: space-around;
+  padding: 20rpx 0;
+  background-color: var(--bgc1);
+  .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--color-regular);
+    font-size: 30rpx;
+    .img-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 90rpx;
+      height: 90rpx;
+      margin-bottom: 10rpx;
+      border-radius: 50%;
+      .icon {
+        width: 54rpx;
+        height: 54rpx;
+      }
+    }
+    .rank {
+      background-color: #ff5575;
+    }
+    .today {
+      background-color: #6299ff;
+      .icon {
+        width: 40rpx;
+        height: 40rpx;
+      }
+    }
+    .artist {
+      background-color: #ffd36a;
+      .icon {
+        width: 45rpx;
+        height: 45rpx;
+      }
+    }
+    .zone {
+      background-color: #816bee;
+      .icon {
+        width: 40rpx;
+        height: 40rpx;
+      }
+    }
+  }
+}
+
+.hot-tag {
+  margin-top: 10rpx;
+  background-color: #fff;
+  padding: 10rpx 15rpx 10rpx 35rpx;
+  .title {
+    background: -webkit-linear-gradient(left top, #ff9500, #fd541c);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30rpx;
+    font-weight: 500;
+    padding-bottom: 10rpx;
+  }
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10rpx;
+    .tag-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      width: 48%;
+      padding: 5rpx 0;
+      font-size: 30rpx;
+      font-weight: 500;
+      color: var(--text-color2);
+      &:nth-child(even) {
+        padding-left: 20rpx;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        .icon {
+          width: 36rpx;
+          height: 36rpx;
+        }
+        .new {
+          width: 40rpx;
+          text-align: center;
+          font-size: 28rpx;
+          font-weight: 700;
+          color: #ffaa00;
+          scale: 0.9;
+        }
+        .hot {
+          text-align: center;
+          width: 40rpx;
+          font-size: 28rpx;
+          font-weight: 700;
+          color: #f1596b;
+          scale: 0.9;
+        }
+      }
+    }
+  }
+}
+
+.loading {
+  width: 100%;
+  padding: 40rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.networkerror {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 30rpx;
+  color: var(--color-regular);
+}

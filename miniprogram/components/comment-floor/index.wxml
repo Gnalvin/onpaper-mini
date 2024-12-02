@@ -1,0 +1,79 @@
+<!--components/comment/index.wxml-->
+<wxs src="../../utils/format.wxs" module="fmt" />
+
+<view class="comment-item">
+  <view class="parent">
+    <Avatar
+      style="display: flex"
+      avatarName="{{comment.avatar ? comment.avatar : ''}}"
+      uid="{{comment.userId ? comment.userId : ''}}"
+      width="80rpx"
+    ></Avatar>
+    <view class="detail" bind:tap="handleClickCommentBody">
+      <view
+        class="username"
+        catch:tap="goToUserHome"
+        data-user="{{comment.userId}}"
+        >{{comment.userName}}</view
+      >
+      <view class="comment-text">
+        <block wx:if="{{comment.replyUserId && comment.replyId !== '0'}}">
+          <text> 回复 </text>
+          <text
+            class="reply-user"
+            data-user="{{comment.replyUserId}}"
+            catch:tap="goToUserHome"
+            >@{{comment.replyUserName }}</text
+          >
+          <text> :</text>
+        </block>
+        {{comment.text}}
+      </view>
+      <view class="time-reply">
+        <text class="time">{{comment.createAT}}</text>
+        <text class="reply">回复</text>
+      </view>
+    </view>
+    <view class="like" bind:tap="postLike">
+      <view class="like-wrapper">
+        <image
+          wx:if="{{comment.isLike}}"
+          class="icon"
+          src="/assets/img/like_active.svg"
+          mode="aspectFill"
+        />
+        <image
+          wx:else
+          class="icon"
+          src="/assets/img/like_normal.svg"
+          mode="aspectFill"
+        />
+        <view class="count" wx:if="{{comment.likes}}">
+          {{fmt.formatNum(comment.likes,false)}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view
+    class="child"
+    wx:if="{{comment.childComments.length && !isChildFloor}}"
+    bind:tap="goToCommentReplyDetail"
+  >
+    <block wx:for="{{comment.childComments}}" wx:key="cId">
+      <view class="child-item">
+        <view class="two-line">
+          <text class="reply-user">{{item.userName}}</text>
+          <block wx:if="{{item.replyUserId && item.replyId !== '0'}}">
+            <text style="color: var(--text-color3)"> 回复 </text>
+            <text class="reply-user">@{{item.replyUserName }}</text>
+          </block>
+          <text>: {{item.text}}</text>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{comment.rootCount > 2}}" class="total">
+      共 {{ comment.rootCount }} 条回复
+    </view>
+  </view>
+  <view wx:if="{{!isChildFloor}}" class="line"></view>
+</view>

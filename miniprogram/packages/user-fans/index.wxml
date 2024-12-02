@@ -1,0 +1,11 @@
+<!--packages/user-fans/index.wxml-->
+<block wx:for="{{users}}" wx:key="userId">
+  <UserSmallCard userInfo="{{item}}" loginUser="{{loginUid}}"></UserSmallCard>
+</block>
+<view class="tip" wx:if="{{tip}}">
+  <text>{{tip}}</text>
+</view>
+
+<view class="loading" wx:if="{{!isEnd}}">
+  <van-loading color="var(--text-color2)" size="30rpx" />
+</view>

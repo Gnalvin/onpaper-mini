@@ -1,0 +1,52 @@
+<!--pages/tabBar/user/index.wxml-->
+<!-- 头部导航栏 -->
+<van-nav-bar title="我的" fixed z-index="999" wx:if="{{showTopNav}}" />
+
+<!-- 资料展示 -->
+<UserHomeHead profile="{{userProfile}}" isFocus="{{0}}" isOwner="{{true}}">
+</UserHomeHead>
+
+<!-- 用户展示导航栏 -->
+<NavBar
+  wx:if="{{isLogin}}"
+  bind:choise="handleChoseNavBar"
+></NavBar>
+
+<!-- 内容展示 -->
+<view class="user-show">
+  <view hidden="{{nav !== 'trend'}}">
+    <block wx:for="{{trends}}" wx:key="trendId">
+      <TrendItem trend="{{item}}"></TrendItem>
+    </block>
+  </view>
+  <view class="art-wrap" hidden="{{nav !== 'artwork'}}">
+    <WaterFlow id="waterFlow"></WaterFlow>
+  </view>
+  <view class="collect-wrap" hidden="{{nav !== 'collect'}}">
+    <block wx:for="{{collects}}" wx:key="artworkId">
+      <SquareArtwork artwork="{{item}}"></SquareArtwork>
+    </block>
+  </view>
+  <view wx:if="{{showEndTip && !showContentTip}}" class="end">
+    ,,Ծ‸Ծ,, 没有更多内容了</view
+  >
+</view>
+
+<!-- 未登陆提示 -->
+<view class="no-login-or-content" wx:if="{{!isLogin}}">
+  <view class="no-tip">登陆探索更多精彩内容</view>
+  <OpButton
+    text="前往登陆"
+    width="300rpx"
+    height="80rpx"
+    bind:click="handleGotoLogin"
+  ></OpButton>
+</view>
+
+<!-- 没有发布过内容提示 -->
+<view class="no-login-or-content" wx:if="{{showContentTip}}">
+  <view class="no-tip">{{noContentTip}}</view>
+</view>
+
+<!-- 回到顶部 -->
+<FixButton scrollY="{{scrollY}}"></FixButton>

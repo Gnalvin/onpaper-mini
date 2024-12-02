@@ -1,0 +1,14 @@
+function isShowCreatTopic(topics, search) {
+  if (!search || search.length < 2) return false
+  for (var index = 0; index < topics.length; index++) {
+    var item = topics[index]
+    if (item.text.toUpperCase() === search.toUpperCase()) {
+      return false
+    }
+  }
+  return true
+}
+
+module.exports = {
+  isShowCreatTopic: isShowCreatTopic
+}

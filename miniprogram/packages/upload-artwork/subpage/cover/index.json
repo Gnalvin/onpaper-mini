@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "cropper": "/components/cropper/index",
+    "OpButton": "/components/op-button"
+  },
+  "navigationBarTitleText": "编辑作品封面"
+}

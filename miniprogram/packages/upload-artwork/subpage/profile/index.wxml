@@ -1,0 +1,188 @@
+<!--packages/upload-artwork/subpage/profile/index.wxml-->
+<page-meta page-style="{{ isShowTagPop ? 'overflow: hidden;' : '' }}" />
+
+<!-- 设置封面 -->
+<view class="cover" bind:tap="goToSettingCover">
+  <image
+    wx:if="{{cover}}"
+    class="cover-img"
+    src="{{cover}}"
+    mode="aspectFill"
+  />
+  <view wx:else="" class="tip">点击设置封面</view>
+  <image class="icon" src="/assets/img/edit_white.svg" />
+</view>
+<!-- 设置文字信息 -->
+<view class="edite-area">
+  <!-- 作品标题 -->
+  <view class="title">
+    <input
+      class="input"
+      maxlength="15"
+      placeholder="作品标题"
+      value="{{title}}"
+      bindinput="onTitleInput"
+    />
+  </view>
+  <!-- 作品简介 -->
+  <view class="introduce">
+    <textarea
+      class="textarea"
+      placeholder="介绍一下作品吧～"
+      value="{{introduce}}"
+      maxlength="350"
+      bindinput="onIntorduceInput"
+      show-confirm-bar="{{false}}"
+    ></textarea>
+    <view class="max-tip" wx:if="{{wordCount > 300}}">
+      <text>{{wordCount}} / 350</text>
+    </view>
+  </view>
+  <!-- 标签设置 -->
+  <van-cell size="large" is-link use-label-slot bind:click="handleShowTagPop">
+    <view slot="title" class="van-title">
+      <image class="icon" src="/assets/img/tag_balck.svg" mode="aspectFill" />
+      <view class="text">标签</view>
+    </view>
+    <view slot="label" class="tag-label">
+      <view class="tag" wx:for="{{tagList}}" wx:key="*this"> #{{item}} </view>
+    </view>
+  </van-cell>
+  <!-- 分区设置 -->
+  <van-cell
+    size="large"
+    is-link
+    bind:click="handleShowZonePic"
+    value-class="content-style"
+    value="{{zone}}"
+  >
+    <view slot="title" class="van-title">
+      <image class="icon" src="/assets/img/all_zone.svg" mode="aspectFill" />
+      <view class="text">分区</view>
+    </view>
+  </van-cell>
+  <!-- 高级设置 -->
+  <van-cell size="large" is-link bind:click="goToSetting">
+    <view slot="title" class="van-title">
+      <image
+        class="icon"
+        src="/assets/img/setting_blod.svg"
+        mode="aspectFill"
+      />
+      <view class="text">设置</view>
+    </view>
+  </van-cell>
+</view>
+<!-- 排序作品 -->
+<view class="sort-area">
+  <SortImg
+    urlList="{{urlList}}"
+    bind:addImg="addArtworkImg"
+    bind:changeList="saveNewList"
+    bind:delImg="delArtworkImg"
+    showDelete="{{false}}"
+    showDelIndex="{{needDelImg}}"
+  ></SortImg>
+  <view class="tip">Tips: 可长按拖拽排序</view>
+</view>
+
+<!-- 设置标签弹窗 -->
+<van-popup
+  show="{{isShowTagPop}}"
+  position="bottom"
+  round
+  closeable
+  bind:close="handleShowTagPop"
+>
+  <view class="tag-setting">
+    <view class="title">添加标签</view>
+
+    <view class="input-wrapper">
+      <input
+        class="input"
+        maxlength="15"
+        confirm-hold
+        placeholder="{{tagList.length < 10 ? '请输入标签' : '最多输入10个标签'}}"
+        value="{{tagString}}"
+        disabled="{{tagList.length === 10}}"
+        bindinput="onTagInput"
+        bindconfirm="onTagInputConfirm"
+      />
+    </view>
+    <view class="max-tip">
+      <text wx:if="{{tagList.length}}"
+        >最多添加10个标签，已添加 {{tagList.length}} 个</text
+      >
+    </view>
+    <view class="tag-list">
+      <block wx:for="{{tagList}}" wx:key="*this">
+        <view class="tag">
+          <view class="tag-text">{{ item }}</view>
+          <view
+            class="delete"
+            bind:tap="handleDelTag"
+            data-index="{{index}}"
+          ></view>
+        </view>
+      </block>
+    </view>
+  </view>
+</van-popup>
+
+<!-- 临时高度 -->
+<view class="temp-height"></view>
+
+<!-- 完成 -->
+<view class="over-bar" style="padding-bottom: {{safeBottomHight}}px;">
+  <view class="tip" bind:tap="handleShowSmallTip">
+    <view class="icon-wrap">
+      <image class="icon" src="/assets/img/info.svg" mode="aspectFill" />
+    </view>
+    <view>小贴士</view>
+  </view>
+  <OpButton
+    class="btn"
+    text="发布作品"
+    width="85%"
+    height="80rpx"
+    fontSize="28rpx"
+    bind:click="uploadFormData"
+  ></OpButton>
+</view>
+
+<!-- 选择分区弹窗 -->
+<van-popup show="{{isShowZone}}" position="bottom" round>
+  <van-picker
+    title="选择分区"
+    show-toolbar
+    columns="{{ zoneOptions}}"
+    bind:cancel="handleShowZonePic"
+    bind:confirm="changeZone"
+  />
+</van-popup>
+
+<!-- 上传等待页面 -->
+<van-overlay
+  custom-class="custom-overlay"
+  show="{{ isShowUploadIng }}"
+  z-index="999"
+>
+  <view class="uploading-wrap">
+    <view class="container">
+      <view class="tip">正在保存数据...</view>
+      <view>请不要关闭页面</view>
+      <view class="bar"></view>
+    </view>
+  </view>
+</van-overlay>
+
+<!-- 消息提示 -->
+<van-toast id="van-toast" />
+
+<!-- 消息提示 -->
+<van-dialog
+  id="van-dialog"
+  confirm-button-class="vant-button"
+  custom-class="vant-custom"
+>
+</van-dialog>

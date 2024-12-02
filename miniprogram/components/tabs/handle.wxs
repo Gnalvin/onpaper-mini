@@ -1,0 +1,102 @@
+var scrollViewInfo
+var itemElInfo = []
+var lineColor
+var lineWidth
+var scrollable
+var initOK = false
+
+var init = function (newVal, oldVal, ownerInstance, ins) {
+  if (newVal.length === 0) return
+  itemElInfo = []
+  // 获取滚动容器的大小和位置
+  var scrollRect = ownerInstance
+    .selectComponent('#tabsScrollView')
+    .getBoundingClientRect()
+
+  var scrollWidth = 0
+  // 计算所有的tab 大小和位置
+  var itemRects = ownerInstance.selectAllComponents('.tab-item')
+  for (var i = 0; i < itemRects.length; i++) {
+    var item = itemRects[i].getBoundingClientRect()
+    scrollWidth = scrollWidth + item.width
+    itemElInfo.push({
+      left: item.left,
+      width: item.width,
+      index: i,
+      el: itemRects[i]
+    })
+  }
+
+  scrollViewInfo = {
+    width: scrollRect.width,
+    left: scrollRect.left,
+    scrollWidth: scrollWidth
+  }
+  var dataSet = ins.getDataset()
+  scrollable = dataSet.dataSet
+  lineColor = dataSet.linecolor
+  lineWidth = dataSet.linewidth
+
+  initOK = true
+
+  var index = dataSet.index === -1 ? 0 : dataSet.index
+  var location = computerLocation(index)
+  ownerInstance.callMethod('scrollTo', { distance: location.distance })
+  var lineEL = ownerInstance.selectComponent('#bottom-line')
+  lineEL.setStyle({
+    position: !scrollable ? 'absolute' : 'relative',
+    transform: 'translateX(' + location.bottomLineX + 'px)',
+    width: lineWidth + 'px',
+    'background-color': lineColor
+  })
+}
+
+var computerLocation = function (index) {
+  var selectItemEl = itemElInfo[index]
+  var scrollLeft = scrollViewInfo.left // 距离视口左边的距离
+  var scrollWidth = scrollViewInfo.scrollWidth // 可滚动距离
+  var scrollViewWidth = scrollViewInfo.width // scrollView的宽度
+
+  var itemLeft = selectItemEl.left - scrollLeft
+  var itemWidth = selectItemEl.width
+
+  if (scrollWidth < scrollViewWidth) scrollWidth = scrollViewWidth
+
+  var distance = itemLeft + itemWidth * 0.5 - scrollViewWidth * 0.5
+
+  if (distance < 0) distance = 0 //左边的特殊情况处理
+  var totalDistance = scrollWidth - scrollViewWidth
+  if (distance > totalDistance) distance = totalDistance //右边的特殊情况处理
+
+  var bottomLineX = itemLeft + (itemWidth - lineWidth) * 0.5
+
+  for (var i = 0; i < itemElInfo.length; i++) {
+    var item = itemElInfo[i]
+    item.el.removeClass('active')
+  }
+  selectItemEl.el.addClass('active')
+
+  return { distance: distance, bottomLineX: bottomLineX }
+}
+
+var choseIndex = function (event, ownerInstance) {
+  if (!initOK) return
+  var index = event.instance.getDataset().index
+  var location = computerLocation(index)
+
+  ownerInstance.callMethod('scrollTo', { distance: location.distance })
+  var lineEL = ownerInstance.selectComponent('#bottom-line')
+  lineEL.setStyle({
+    position: !scrollable ? 'absolute' : 'relative',
+    transform: 'translateX(' + location.bottomLineX + 'px)',
+    width: lineWidth + 'px',
+    'background-color': lineColor
+  })
+
+  ownerInstance.callMethod('onClickTab', { index: index })
+}
+
+module.exports = {
+  init: init,
+  choseIndex: choseIndex
+}

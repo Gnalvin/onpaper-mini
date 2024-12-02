@@ -1,0 +1,284 @@
+<!--packages/artwork-show/index.wxml-->
+<wxs src="./handle.wxs" module="handle" />
+<wxs src="../../utils/format.wxs" module="fmt" />
+
+<view wx:if="{{artInfo}}">
+  <!-- 头部导航栏 -->
+  <van-nav-bar fixed placeholder z-index="999">
+    <view slot="left" class="nav-bar-left">
+      <image
+        class="icon"
+        src="/assets/img/arrow_left.svg"
+        mode="aspectFill"
+        bind:tap="navGoBack"
+        wx:if="{{pagesCount > 1}}"
+      />
+      <image
+        wx:else
+        class="home-icon"
+        src="/assets/img/home.svg"
+        mode="aspectFill"
+        bind:tap="navGoBack"
+      />
+      <Avatar
+        style="display: flex"
+        avatarName="{{artInfo.avatarName ? artInfo.avatarName : ''}}"
+        uid="{{artInfo.userId ? artInfo.userId : ''}}"
+        width="60rpx"
+      ></Avatar>
+      <view class="username one-line" catch:tap="goToUserHome"
+        >{{artInfo.userName}}</view
+      >
+    </view>
+  </van-nav-bar>
+
+  <!-- 图片展示区 -->
+  <view class="art-show">
+    <swiper style="height: {{swiperHeight}}rpx" bindchange="handleSwiperChange">
+      <block wx:for="{{artInfo.picture}}" wx:key="fileName">
+        <swiper-item>
+          <imageItem
+            image-class="pic"
+            src="{{item.fileName}}"
+            mode="aspectFit"
+            data-url="{{item.fileName}}"
+            catch:tap="handlePreviewPic"
+          ></imageItem>
+        </swiper-item>
+      </block>
+    </swiper>
+    <view
+      class="indicator-wrapper"
+      wx:if="{{artInfo.picture.length > 1}}"
+      style="width: {{artInfo.picture.length > 4 ? 50 : artInfo.picture.length * 10}}px;"
+    >
+      <Indicator currentIndex="{{swiperIndex}}">
+        <block wx:for="{{artInfo.picture.length}}" wx:key="item">
+          <IndicatorItem>
+            <view class="dot-wrap" style="width: 10px">
+              <view
+                class="dot {{item==swiperIndex?'active':''}} {{handle.showSmallDot(swiperIndex,item,artInfo.picture.length)?'more':''}}"
+              ></view>
+            </view>
+          </IndicatorItem>
+        </block>
+      </Indicator>
+    </view>
+  </view>
+
+  <!-- 文字展示区 -->
+  <view class="art-describe">
+    <view class="title">{{artInfo.title}}</view>
+    <view class="describe">{{artInfo.intro}}</view>
+    <view class="tag-list">
+      <text class="tag"> {{ artInfo.zone }} </text>
+      <block wx:for="{{artInfo.tag}}" wx:key="tagId">
+        <text
+          class="tag"
+          bind:tap="goToTagPage"
+          data-id="{{item.tagId}}"
+          data-name="{{item.tagName}}"
+          >#{{ item.tagName }}</text
+        >
+      </block>
+    </view>
+    <view class="time-copyright">
+      <view class="time">{{artInfo.createAT}}</view>
+      <view
+        class="copyright"
+        wx:if="{{artInfo.copyright}}"
+        bind:tap="handleCopyRightTip"
+      >
+        <image
+          class="icon"
+          wx:if="{{handle.showCopyRight('OWNER',artInfo.copyright)}}"
+          src="../../assets/img/copyright-owner.svg"
+          mode="aspectFill"
+        />
+        <image
+          wx:if="{{handle.showCopyRight('BY',artInfo.copyright)}}"
+          class="icon"
+          src="../../assets/img/copyright-by.svg"
+          mode="aspectFill"
+        />
+        <image
+          wx:if="{{handle.showCopyRight('NC',artInfo.copyright)}}"
+          class="icon"
+          src="../../assets/img/copyright-nc.svg"
+          mode="aspectFill"
+        />
+        <image
+          wx:if="{{handle.showCopyRight('ND',artInfo.copyright)}}"
+          class="icon"
+          src="../../assets/img/copyright-nd.svg"
+          mode="aspectFill"
+        />
+        <view class="text" wx:if="{{artInfo.copyright == 'OWNER'}}">
+          版权归作者所有
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 作者其他作品展示 -->
+  <view class="other-show">
+    <view class="header">
+      <view class="left">
+        <Avatar
+          style="display: flex"
+          avatarName="{{artInfo.avatarName ? artInfo.avatarName : ''}}"
+          uid="{{artInfo.userId ? artInfo.userId : ''}}"
+          width="80rpx"
+        ></Avatar>
+        <view class="username one-line" catch:tap="goToUserHome"
+          >{{artInfo.userName}}</view
+        >
+        <!-- 标签 -->
+        <view class="v-status" wx:if="{{artInfo.vStatus}}">
+          <image
+            wx:if="{{artInfo.vStatus == 1}}"
+            class="icon"
+            src="/assets/img/v_tag_user.svg"
+            mode="aspectFill"
+          ></image>
+          <image
+            wx:else
+            class="icon"
+            src="/assets/img/v_tag_org.svg"
+            mode="aspectFill"
+          ></image>
+        </view>
+      </view>
+      <view class="right">
+        <OpButton
+          wx:if="{{!artInfo.isOwner}}"
+          style="display: inline-flex"
+          text="{{artInfo.interact.isFocusAuthor ? '已关注':'关注'}}"
+          btnStyle="{{artInfo.interact.isFocusAuthor ? 'white':''}}"
+          width="130rpx"
+          bind:click="handleFocusUser"
+          login
+        ></OpButton>
+      </view>
+    </view>
+    <view class="bottom" wx:if="{{artInfo.otherArtwork.length}}">
+      <SlideShow
+        artworks="{{artInfo.otherArtwork}}"
+        openNew="{{false}}"
+      ></SlideShow>
+    </view>
+  </view>
+
+  <!-- 评论展示区域 -->
+  <view class="comment-wrapper">
+    <!-- 关闭了评论区 -->
+    <view class="no-comment" wx:if="{{artInfo.comSetting === 'close'}}">
+      <view class="text">由于作者设置, 评论暂时关闭</view>
+    </view>
+    <!-- 目前0个评论 -->
+    <view class="no-comment" wx:elif="{{zeroComment}}">
+      <image class="icon" src="/assets/img/no_comment.svg" mode="aspectFill" />
+      <view class="text">快来发表你的评论吧</view>
+    </view>
+
+    <block wx:if="{{artInfo.comSetting !== 'close'}}">
+      <view class="total" wx:if="{{comments.length}}">
+        共 {{artInfo.comments}} 条评论
+      </view>
+      <block wx:for="{{comments}}" wx:key="cId">
+        <CommentItem
+          id="c{{item.cId}}"
+          isCanComment="{{handle.isCanComment(artInfo)}}"
+          comment="{{item}}"
+          bind:reply="handleShowReplyInput"
+          bind:like="handlePostCommentLike"
+        ></CommentItem>
+      </block>
+      <view wx:if="{{commentEnd && !zeroComment}}" class="end">
+        - The End -
+      </view>
+      <view wx:elif="{{!commentEnd}}" class="loading">
+        <van-loading color="var(--text-color2)" size="30rpx" />
+      </view>
+    </block>
+  </view>
+  <view
+    class="{{tempHeight ? '' :'temp-height'}}"
+    style="height:{{tempHeight}}px;"
+  ></view>
+</view>
+
+<!-- 作品已删除或不可见 -->
+<view class="no-see" wx:if="{{noExist}}">
+  <view>作品已删除或不可见</view>
+  <view class="tip">3 秒后将返回上一页</view>
+</view>
+
+<!-- 评论输入框 -->
+<CommentInput
+  wx:if="{{artInfo}}"
+  id="comment-input"
+  ownId="{{artInfo.artworkId}}"
+  replyUserId="{{artInfo.userId}}"
+  ownType="aw"
+  bind:success="handlePostCommentSuccess"
+  bind:like="handlePostArtLike"
+  bind:collect="handlePostCollect"
+  bind:blur="handleBlur"
+  interact="{{artInfo.interact}}"
+  likes="{{artInfo.likes}}"
+  comments="{{artInfo.comments}}"
+  collects="{{artInfo.collects}}"
+  comSetting="{{artInfo.comSetting}}"
+  isOwner="{{artInfo.isOwner}}"
+></CommentInput>
+
+<!-- 消息提示 -->
+<van-dialog
+  id="van-dialog"
+  confirm-button-class="vant-button"
+  custom-class="vant-custom"
+>
+</van-dialog>
+
+<!-- 如果仅粉丝可见 遮罩层-->
+<van-overlay
+  z-index="999"
+  custom-class="custom-overlay"
+  root-portal
+  lock-scroll
+  show="{{ artInfo.whoSee ==='onlyFans' && !artInfo.isOwner && !artInfo.interact.isFocusAuthor}}"
+>
+  <view class="onlyfans-wrapper">
+    <Avatar
+      style="display: flex"
+      avatarName="{{artInfo.avatarName ? artInfo.avatarName : ''}}"
+      uid="{{artInfo.userId ? artInfo.userId : ''}}"
+      width="180rpx"
+    ></Avatar>
+    <view class="username">{{artInfo.userName}}</view>
+    <view class="followers">
+      <view>
+        <text>{{fmt.formatNum(artInfo.userCount.fans)}}</text>
+        <text class="text">粉丝</text>
+      </view>
+      <view>
+        <text>{{fmt.formatNum(artInfo.userCount.likes)}}</text>
+        <text class="text">喜欢</text>
+      </view>
+      <view>
+        <text>{{fmt.formatNum(artInfo.userCount.collects)}}</text>
+        <text class="text">收藏</text>
+      </view>
+    </view>
+    <OpButton
+      fontSize="32rpx"
+      bgcColor="#1f6ce0"
+      text="关注"
+      width="220rpx"
+      bind:click="handleFocusUser"
+      login
+    ></OpButton>
+    <div class="tip">作品仅允许粉丝可见</div>
+  </view>
+</van-overlay>

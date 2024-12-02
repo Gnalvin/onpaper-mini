@@ -1,0 +1,8 @@
+<!--components/slide-show/index.wxml-->
+<scroll-view scroll-x class="artwork-list" enhanced show-scrollbar="{{false}}">
+  <block wx:for="{{artworks}}" wx:key="artworkId">
+    <view class="artwork-item">
+      <SquareArtwork artwork="{{item}}" openNew="{{isOpenNew}}"></SquareArtwork>
+    </view>
+  </block>
+</scroll-view>

@@ -1,0 +1,41 @@
+/* pages/tabBar/user/index.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bgc2) !important;
+}
+
+.no-login-or-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .no-tip {
+    font-size: 28rpx;
+    color: var(--text-color3);
+    margin-bottom: 50rpx;
+  }
+}
+
+.art-wrap {
+  margin-top: 10rpx;
+}
+
+.collect-wrap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  padding: 0 3px;
+  margin-top: 10rpx;
+  background-color: transparent;
+}
+
+.end {
+  padding: 25rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: var(--text-color3);
+}

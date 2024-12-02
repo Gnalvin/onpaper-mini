@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "ImgWrap": "../img-wrap/img-wrap"
+  }
+}

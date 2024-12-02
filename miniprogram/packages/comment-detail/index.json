@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "CommentItem": "/components/comment-floor/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "CommentInput":"/components/comment-input/index"
+  },
+  "navigationBarTitleText": "评论详情"
+}

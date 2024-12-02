@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "Avatar": "../avatar/index",
+    "ImgWrap": "./cpn/img-wrap/img-wrap",
+    "Forward": "./cpn/forward",
+    "OpButton": "/components/op-button"
+  }
+}

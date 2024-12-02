@@ -1,0 +1,13 @@
+function formatSex(sex) {
+  var sexMap = {
+    man: '男',
+    woman: '女',
+    privacy: '保密'
+  }
+
+  return sexMap[sex]
+}
+
+module.exports = {
+  formatSex: formatSex
+}

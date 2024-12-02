@@ -1,0 +1,30 @@
+<!--components/tabs/index.wxml-->
+<wxs module="handle" src="./handle.wxs"></wxs>
+
+<scroll-view
+  id="tabsScrollView"
+  scroll-x="{{scrollable}}"
+  enable-flex="{{!scrollable}}"
+  style="display: {{!scrollable?'flex':''}};width: 100%;"
+  class="scroll-view"
+  enhanced
+  show-scrollbar="{{false}}"
+>
+  <view
+    style="position: relative; display: {{!scrollable?'flex':''}};width: 100%;"
+    tabs="{{tabs}}"
+    data-scrollable="{{scrollable}}"
+    data-lineWidth="{{bottomLineWidth}}"
+    data-lineColor="{{bottomLineColor}}"
+    data-index="{{choseIndex}}"
+    choseIndex="{{choseIndex}}"
+    change:tabs="{{handle.init}}"
+  >
+    <block wx:for="{{tabs}}" wx:key="text">
+      <view class="tab-item" bind:tap="{{handle.choseIndex}}" data-index="{{index}}">
+        {{item.text}}
+      </view>
+    </block>
+    <view id="bottom-line" class="bottom-line"></view>
+  </view>
+</scroll-view>

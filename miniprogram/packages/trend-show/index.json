@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "Avatar": "/components/avatar",
+    "OpButton": "/components/op-button",
+    "TrendItem": "/components/trend-item",
+    "CommentItem": "/components/comment-floor/index",
+    "CommentInput": "/components/comment-input/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-overlay": "@vant/weapp/overlay/index"
+  },
+  "navigationBarTitleText": "动态详情"
+}

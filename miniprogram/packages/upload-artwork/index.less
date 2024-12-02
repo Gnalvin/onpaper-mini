@@ -1,0 +1,122 @@
+/* packages/upload-artwork/index.wxss */
+page {
+  height: 100vh;
+  background-color: #000;
+  color: #eee;
+  overflow: hidden;
+}
+.upload-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.show-area {
+  flex: 1;
+  .upload-tip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    line-height: 2;
+    background-color: #0c0c17;
+    .title {
+      font-size: 38rpx;
+    }
+    .other {
+      margin-top: 30rpx;
+      font-size: 28rpx;
+    }
+  }
+}
+
+.indicator-area {
+  padding: 40rpx 30rpx;
+  .scroll-view {
+    width: calc(100vw - 20rpx);
+    white-space: nowrap;
+    position: relative;
+    left: -20rpx;
+  }
+  .indicator-item {
+    position: relative;
+    display: inline-flex;
+    vertical-align: middle;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: 20rpx;
+    .add {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 140rpx;
+      height: 140rpx;
+      background-color: #202023;
+      border-radius: 20rpx;
+      .icon {
+        width: 50rpx;
+        height: 50rpx;
+      }
+    }
+    .pic {
+      border-radius: 20rpx;
+      width: 150rpx;
+      height: 150rpx;
+    }
+    .delete {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 35rpx;
+      height: 35rpx;
+      border-radius: 50%;
+      background-color: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      border: none;
+      right: 20rpx;
+      top: 8rpx;
+      .icon {
+        width: 25rpx;
+        height: 25rpx;
+      }
+    }
+  }
+  .temp-width {
+    vertical-align: middle;
+    display: inline-flex;
+    height: 70px;
+  }
+  .temp-width:last-of-type {
+    margin-right: 20rpx;
+  }
+}
+
+.next-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50rpx;
+  .add {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    font-weight: 500;
+    font-size: 32rpx;
+  }
+}
+
+.pic {
+  height: 100%;
+  width: 100%;
+}
+
+.vant-button {
+  width: 100% !important;
+}
+
+.vant-custom {
+  color: #000;
+  --dialog-has-title-message-padding-top: 40rpx;
+}

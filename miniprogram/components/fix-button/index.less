@@ -1,0 +1,60 @@
+/* components/fix-button/index.wxss */
+.btn-wrapper {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 100%;
+  background-color: #fff;
+  box-shadow: 0rpx 2rpx 6rpx rgb(160, 160, 160);
+  .icon {
+    width: 50rpx;
+    height: 50rpx;
+  }
+}
+
+.upload {
+  background-color: #2b61ec;
+  box-shadow: none;
+  .icon {
+    width: 36rpx;
+    height: 36rpx;
+  }
+}
+
+.chose-upload-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0rpx 40rpx 40rpx;
+    padding: 30rpx 40rpx;
+    background-color: #fff;
+    border-radius: 20rpx;
+    border: 1px solid hsl(0 0% 83%);
+    box-shadow: 0 1rem 2rem hsl(0 0% 0% / 20%);
+    .icon {
+      width: 65rpx;
+      height: 65rpx;
+      margin-right: 40rpx;
+    }
+    .tip {
+      .header {
+        font-size: 34rpx;
+        font-weight: 600;
+        color: var(--text-color1);
+      }
+      .bottom {
+        font-size: 28rpx;
+        font-weight: 500;
+        color: var(--text-color3);
+      }
+    }
+  }
+}

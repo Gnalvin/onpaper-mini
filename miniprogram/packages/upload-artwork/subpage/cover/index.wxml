@@ -1,0 +1,54 @@
+<!--packages/upload-artwork/subpage/cover/index.wxml-->
+<view class="cover-page" wx:if="{{urlList.length}}">
+  <view style="flex: 1">
+    <cropper
+      id="image-cropper"
+      imgSrc="{{urlList[0].url}}"
+      cropHeight="{{cropperHeight}}"
+      cropWidth="{{cropperWidth}}"
+      onlunchChose="{{false}}"
+      showBorder="{{false}}"
+    ></cropper>
+  </view>
+  <view class="indicator-area">
+    <scroll-view
+      class="scroll-view"
+      scroll-x
+      scroll-with-animation
+      enhanced
+      show-scrollbar="{{false}}"
+      id="scrollview"
+    >
+      <view
+        class="temp-width"
+        style="width: {{tempWidth}}px;"
+        wx:if="{{urlList.length}}"
+      ></view>
+      <block wx:for="{{urlList}}" wx:key="url">
+        <view
+          class="indicator-item"
+          data-index="{{index}}"
+          catch:tap="changeSwiperIndex"
+        >
+          <image class="pic" src="{{item.url}}" mode="aspectFill" />
+        </view>
+      </block>
+      <view
+        class="temp-width"
+        style="width: {{tempWidth}}px"
+        wx:if="{{urlList.length}}"
+      ></view>
+    </scroll-view>
+  </view>
+  <view class="next-bar" style="padding-bottom: {{safeBottomHight}}px;">
+    <view class="cancel" bind:tap="goBack">返回</view>
+    <OpButton
+      style="display: inline-flex"
+      text="完成"
+      width="200rpx"
+      height="80rpx"
+      fontSize="28rpx"
+      bind:click="saveImg"
+    ></OpButton>
+  </view>
+</view>

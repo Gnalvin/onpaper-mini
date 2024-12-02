@@ -1,0 +1,58 @@
+/* components/user-card/index.wxss */
+@import '../../assets/css/ellipsis.less';
+
+.user-card {
+  padding: 30rpx;
+  background-color: var(--bgc1);
+  margin-bottom: 10rpx;
+  border-bottom: 1rpx solid var(--border-color2);
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10rpx;
+    .name-data {
+      flex: 1;
+      margin-left: 28rpx;
+      .name-wrapper {
+        display: flex;
+        align-items: center;
+        .name {
+          font-size: 34rpx;
+          font-weight: 500;
+          max-width: 320rpx;
+          margin-right: 10rpx;
+        }
+        .v-status {
+          display: flex;
+          align-items: center;
+          .icon {
+            width: 32rpx;
+            height: 32rpx;
+          }
+        }
+      }
+      .data {
+        color: var(--text-color3);
+        font-size: small;
+        .likes {
+          margin-right: 10rpx;
+        }
+      }
+    }
+
+    .focus {
+      flex-shrink: 0;
+    }
+  }
+  .body {
+    margin-top: 20rpx;
+    padding-bottom: 10rpx;
+    .art-wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 0 3px;
+      background-color: transparent;
+    }
+  }
+}

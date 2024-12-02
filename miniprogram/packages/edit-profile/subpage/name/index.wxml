@@ -1,0 +1,28 @@
+<!--pages/edit-profile/subpage/name/index.wxml-->
+<view class="input-wrapper">
+  <input
+    class="input"
+    maxlength="12"
+    placeholder="起个好听的名字吧"
+    value="{{userName}}"
+    bindinput="handleInput"
+  />
+  <view class="max-tip">
+    <text>{{wordCount}} / 12</text>
+  </view>
+</view>
+
+<view class="tip">请设置2~12位长度的名字，不能输入特殊符号噢</view>
+
+<view class="save-btn">
+  <OpButton
+    text="保存名字"
+    width="420rpx"
+    height="80rpx"
+    bind:click="handleSave"
+    isDisable="{{userName === oldName}}"
+  ></OpButton
+></view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

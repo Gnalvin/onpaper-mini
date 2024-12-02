@@ -1,0 +1,22 @@
+function formatAvatarUrl(
+  fileName,
+  uid,
+  deafultAvata,
+  previewOssUrl,
+  size = '',
+  noLoginAvatarUrl = ''
+) {
+  // 文件后缀
+  var sizeType = size ? '_' + size + '.' : '.'
+  fileName = fileName.split('.').join(sizeType)
+  // 如果没有登陆返回 logo头像
+  if (noLoginAvatarUrl) return previewOssUrl + noLoginAvatarUrl
+  // 如果没有头像 返回默认头像
+  if (!fileName) return previewOssUrl + deafultAvata
+
+  return (url = previewOssUrl + 'avatars/' + uid + '/' + fileName)
+}
+
+module.exports = {
+  formatAvatarUrl: formatAvatarUrl
+}

@@ -1,0 +1,154 @@
+/* components/user-home/index.wxss */
+.user-home-head {
+  overflow: hidden;
+  position: relative;
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  height: 300rpx;
+  width: 100%;
+  z-index: -1;
+  &::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.45),
+      rgba(0, 0, 0, 0.15) 40%,
+      rgba(0, 0, 0, 0.15)
+    );
+  }
+}
+
+.user-profile {
+  position: relative;
+  padding: 15rpx 30rpx 24rpx;
+  margin-top: 280rpx;
+  border-radius: 25rpx;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  background-color: var(--surface-color1);
+  z-index: 1;
+  .avatar-count {
+    justify-content: space-between;
+    display: flex;
+    margin-bottom: 26rpx;
+    .avatar-item {
+      position: relative;
+      .avatar {
+        position: absolute;
+        bottom: -15rpx;
+      }
+    }
+    .count {
+      display: flex;
+      .count-item {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-left: 28rpx;
+        min-width: 100rpx;
+        .num {
+          color: var(--text-color1);
+          font-size: 28rpx;
+          font-weight: 500;
+        }
+        .text {
+          color: var(--text-color3);
+          font-size: 24rpx;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+  .name-handle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .name {
+      max-width: 220px;
+      font-size: 36rpx;
+      font-weight: 700;
+    }
+    .handle {
+      display: flex;
+      .icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 54rpx;
+        height: 54rpx;
+        border-radius: 50%;
+        background-color: #f5f5f5;
+        margin-left: 35rpx;
+        .icon {
+          width: 34rpx;
+          height: 34rpx;
+        }
+      }
+      .edit-profile {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 24rpx;
+        font-weight: 500;
+        color: var(--text-color2);
+        border: 2rpx solid var(--border-color1);
+        padding: 0 20rpx;
+        border-radius: 25rpx;
+        background-color: #f5f5f5;
+      }
+    }
+  }
+  .describe-more {
+    display: flex;
+    justify-content: space-between;
+    font-size: 26rpx;
+    color: var(--text-color3);
+    margin-top: 26rpx;
+    .more {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: 100rpx;
+      margin-left: 30rpx;
+      .icon {
+        width: 30rpx;
+        height: 30rpx;
+      }
+    }
+  }
+  .v-status {
+    display: flex;
+    align-items: center;
+    margin-top: 18rpx;
+    .icon {
+      width: 24rpx;
+      height: 24rpx;
+    }
+    .tag {
+      margin-left: 10rpx;
+      font-size: 24rpx;
+      color: var(--text-color2);
+    }
+  }
+}
+
+// 显示一行
+.one-line {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all; // 只对英文起作用，以字母作为依据，强制换行
+  line-break: anywhere; // 任意位置都可以作为换行点，包括任意的标点。
+  white-space: normal !important;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

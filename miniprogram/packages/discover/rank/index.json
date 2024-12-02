@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "Tabs": "/components/tabs",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-sticky": "@vant/weapp/sticky/index",
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "SquareArtwork": "/components/artwork/square",
+    "UserCard": "/components/user-card/index",
+    "van-notice-bar": "@vant/weapp/notice-bar/index"
+  }
+}

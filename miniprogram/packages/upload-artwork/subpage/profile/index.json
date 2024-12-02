@@ -1,0 +1,13 @@
+{
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-picker": "@vant/weapp/picker/index",
+    "van-toast": "@vant/weapp/toast/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "SortImg": "/components/sort-img",
+    "OpButton": "/components/op-button"
+  },
+  "navigationBarTitleText": "上传作品"
+}

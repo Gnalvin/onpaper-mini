@@ -1,0 +1,31 @@
+/* components/tabs/index.wxss */
+.scroll-view {
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-item {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20rpx;
+  height: 45px;
+  font-weight: 500;
+  font-size: 30rpx;
+  color: var(--color-regular);
+}
+
+.bottom-line {
+  position: relative;
+  left: 0;
+  transition-duration: 300ms;
+  height: 3px;
+  bottom: 5px;
+  border-radius: 5px;
+}
+
+.active {
+  font-weight: 700;
+  color: var(--text-color1);
+}

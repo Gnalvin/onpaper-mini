@@ -1,0 +1,15 @@
+//删除/私密/不是关注 不展示动态
+function formartClass(count) {
+  if (count === 1) {
+    return 'one-img'
+  }
+  if (count === 2 || count === 4) {
+    return 'two-column-img'
+  }
+
+  return 'three-column-img '
+}
+
+module.exports = {
+  formartClass: formartClass
+}

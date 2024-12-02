@@ -1,0 +1,25 @@
+function padLeftZero(str) {
+  str = str.toString()
+  return ('00' + str).slice(str.length)
+}
+
+// 把 数字转成 字符串 12999 -> 1.30 万
+function formatNum(num, chinese = true) {
+  if (!num) return 0
+  //如果大于10万 保留1位
+  if (num > 100000) {
+    var formatNum = (num / 10000).toFixed(1)
+    return chinese ? formatNum + ' 万' : formatNum + 'w'
+  }
+  // 如果大于1万 保留2位
+  if (num > 10000) {
+    var formatNum = (num / 10000).toFixed(2)
+    return chinese ? formatNum + ' 万' : formatNum + 'w'
+  }
+  return num
+}
+
+module.exports = {
+  formatNum: formatNum,
+  padLeftZero: padLeftZero
+}

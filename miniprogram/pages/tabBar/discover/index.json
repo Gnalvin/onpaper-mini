@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "TrendItem": "/components/trend-item",
+    "van-loading": "@vant/weapp/loading/index",
+    "OpButton": "/components/op-button/index"
+  },
+  "navigationBarTitleText": "广场"
+}

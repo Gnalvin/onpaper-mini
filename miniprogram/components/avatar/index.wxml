@@ -1,0 +1,11 @@
+<!--components/avatar/index.wxml-->
+<wxs src="./index.wxs" module="fmt" />
+<!-- 登陆头像 -->
+<image
+  catch:tap="goToUserHome"
+  lazy-load
+  class="img"
+  src="{{fmt.formatAvatarUrl(avatarName,uid,defaultAvatar,previewOssUrl,'',showLogo ? noLoginAvatar : '')}}"
+  mode="aspectFill"
+  style="width: {{width}};height: {{width}};"
+/>

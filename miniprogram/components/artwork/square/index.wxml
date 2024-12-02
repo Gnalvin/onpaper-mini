@@ -1,0 +1,20 @@
+<!--components/artwork/square/index.wxml-->
+<wxs src="./util.wxs" module="util" />
+
+<view class="square-item" bind:tap="goToDetail">
+  <view class="wrap">
+    <imageItem
+      wx:if="{{artwork.cover}}"
+      image-class="cover"
+      src="{{artwork.cover}}"
+      mode="aspectFill"
+    ></imageItem>
+    <view
+      class="rank"
+      wx:if="{{rank}}"
+      style="background-color: {{util.styleBgc(rank)}};"
+    >
+      <view class="num">{{ rank }}</view>
+    </view>
+  </view>
+</view>

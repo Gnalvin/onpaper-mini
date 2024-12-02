@@ -1,0 +1,7 @@
+function indexOf(arr, value) {
+  return arr.indexOf(value)
+}
+
+module.exports = {
+  indexOf: indexOf
+}

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "UserSmallCard": "/components/user-card/small-card",
+    "van-loading": "@vant/weapp/loading/index"
+  }
+}

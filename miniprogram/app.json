@@ -1,0 +1,214 @@
+{
+  "pages": [
+    "pages/tabBar/home/index",
+    "pages/tabBar/user/index",
+    "pages/tabBar/message/index",
+    "pages/tabBar/discover/index",
+    "pages/agreement/index"
+  ],
+  "subPackages": [{
+      "root": "packages/edit-profile",
+      "name": "EditProfile",
+      "pages": [
+        "index",
+        "subpage/introduce/index",
+        "subpage/name/index",
+        "subpage/avatar/index",
+        "subpage/banner/index"
+      ]
+    },
+    {
+      "root": "packages/discover",
+      "name": "TabDiscover",
+      "pages": [
+        "new/index",
+        "artist/index",
+        "rank/index",
+        "zone/index"
+      ]
+    },
+    {
+      "root": "packages/login",
+      "name": "Login",
+      "pages": [
+        "wx-login/index",
+        "phone-login/index",
+        "password-login/index"
+      ]
+    },
+    {
+      "root": "packages/upload-artwork",
+      "name": "UploadArtwork",
+      "pages": [
+        "index",
+        "subpage/profile/index",
+        "subpage/cover/index",
+        "subpage/setting/index"
+      ]
+    },
+    {
+      "root": "packages/artwork-show",
+      "name": "ArtworkShow",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/user-fans",
+      "name": "UserFollow",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/upload-trend",
+      "name": "UploadTrend",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/user-profile",
+      "name": "UserProfile",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/tag-page",
+      "name": "TagPage",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/comment-detail",
+      "name": "CommentDetail",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/user-home",
+      "name": "UserHome",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/trend-show",
+      "name": "TrendShow",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/notify",
+      "name": "NotifyPage",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/chat-detail",
+      "name": "ChatDetail",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "root": "packages/setting",
+      "name": "Setting",
+      "pages": [
+        "index"
+      ]
+    }
+  ],
+  "preloadRule": {
+    "pages/tabBar/home/index": {
+      "network": "all",
+      "packages": [
+        "UploadArtwork",
+        "UploadTrend",
+        "ArtworkShow",
+        "TrendShow"
+      ]
+    },
+    "pages/tabBar/message/index": {
+      "network": "all",
+      "packages": [
+        "NotifyPage",
+        "ChatDetail"
+      ]
+    },
+    "pages/tabBar/discover/index": {
+      "network": "all",
+      "packages": [
+        "TabDiscover",
+        "TagPage"
+      ]
+    },
+    "pages/tabBar/user/index": {
+      "network": "all",
+      "packages": [
+        "EditProfile",
+        "Login",
+        "Setting",
+        "UserFollow"
+      ]
+    },
+    "packages/artwork-show/index": {
+      "network": "all",
+      "packages": [
+        "UserHome",
+        "CommentDetail",
+        "TagPage"
+      ]
+    },
+    "packages/trend-show/index": {
+      "network": "all",
+      "packages": [
+        "UserHome",
+        "CommentDetail"
+      ]
+    }
+  },
+  "tabBar": {
+    "color": "#7d7d7d",
+    "selectedColor": "#000",
+    "backgroundColor": "#ffffff",
+    "list": [{
+        "pagePath": "pages/tabBar/home/index",
+        "iconPath": "assets/tabbar/home_normal.png",
+        "selectedIconPath": "assets/tabbar/home_active.png"
+      },
+      {
+        "pagePath": "pages/tabBar/discover/index",
+        "iconPath": "assets/tabbar/compass_normal.png",
+        "selectedIconPath": "assets/tabbar/compass_active.png"
+      },
+      {
+        "pagePath": "pages/tabBar/message/index",
+        "iconPath": "assets/tabbar/message_normal.png",
+        "selectedIconPath": "assets/tabbar/message_active.png"
+      },
+      {
+        "pagePath": "pages/tabBar/user/index",
+        "iconPath": "assets/tabbar/user_normal.png",
+        "selectedIconPath": "assets/tabbar/user_active.png"
+      }
+    ]
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "纸上",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#eeeeee"
+  },
+  "useExtendedLib": {
+    "weui": true
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

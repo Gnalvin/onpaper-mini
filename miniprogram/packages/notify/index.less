@@ -1,0 +1,146 @@
+/* packages/notify/index.wxss */
+page {
+  background-color: var(--bgc1);
+}
+
+.notify-body {
+  padding: 30rpx;
+  position: relative;
+  &::after {
+    background-color: var(--border-color3);
+    bottom: 0;
+    content: '';
+    height: 2rpx;
+    left: 40rpx;
+    position: absolute;
+    right: 50rpx;
+  }
+  .body {
+    display: flex;
+    position: relative;
+    .message {
+      display: flex;
+      flex-grow: 1;
+    }
+  }
+}
+
+.avatar-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 26rpx;
+  position: relative;
+  .icon {
+    position: absolute;
+    width: 36rpx;
+    height: 36rpx;
+    right: -10rpx;
+    bottom: 4rpx;
+  }
+}
+
+.name-action-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.6;
+  width: 335rpx;
+  .username {
+    font-size: 30rpx;
+    font-weight: 500;
+    color: var(--text-color1);
+    margin-bottom: 5rpx;
+  }
+  .action-time {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-color3);
+    font-size: 24rpx;
+  }
+}
+
+.handle {
+  display: flex;
+  flex-shrink: 0;
+  .img-wrap {
+    background-color: var(--surface-color2);
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 10rpx;
+    overflow: hidden;
+    .img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .focus {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.other-info {
+  margin-left: 115rpx;
+  margin-right: 100rpx;
+  margin-top: 10rpx;
+  .my-text {
+    padding: 10rpx 20rpx;
+    color: var(--text-color3);
+    font-size: 26rpx;
+    line-break: anywhere;
+    border-left: 4rpx solid var(--border-color1);
+  }
+  .comment {
+    .sender-text {
+      font-size: 28rpx;
+      line-break: anywhere;
+      color: var(--text--color2);
+    }
+    .my-text {
+      margin-top: 4rpx;
+    }
+    .reply-like {
+      display: flex;
+      align-items: center;
+      margin-top: 20rpx;
+      .reply {
+        display: inline-block;
+        font-size: 22rpx;
+        padding: 12rpx 24rpx;
+        background-color: var(--bgc3);
+        border-radius: 40rpx;
+        margin-right: 40rpx;
+      }
+      .like {
+        display: flex;
+        .icon {
+          width: 36rpx;
+          height: 36rpx;
+        }
+      }
+    }
+  }
+}
+
+.zero-msg {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.end {
+  padding: 35rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: var(--text-color3);
+}
+.loading {
+  padding: 30rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

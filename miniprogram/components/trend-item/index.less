@@ -1,0 +1,137 @@
+/* components/trend-item/index.wxss */
+@import '../../assets/css/ellipsis.less';
+
+.trend-item {
+  flex: 1;
+  padding: 25rpx;
+  background-color: var(--surface-color1);
+  margin: 10rpx 0;
+}
+
+.header {
+  display: flex;
+  .nick-time-other {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10rpx;
+    .nick-time {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .nick {
+      display: flex;
+      align-items: center;
+      color: var(--text-color2);
+      font-size: 28rpx;
+      font-weight: 700;
+      margin-bottom: 5rpx;
+    }
+    .time {
+      font-size: 24rpx;
+      color: var(--text-color3);
+    }
+    .v-status {
+      display: flex;
+      align-items: center;
+      margin-left: 10rpx;
+      .icon {
+        width: 32rpx;
+        height: 32rpx;
+      }
+    }
+    .other {
+      display: flex;
+      .btn {
+        margin-top: 10rpx;
+      }
+      .handle {
+        flex: 1;
+        padding-left: 20rpx;
+        .icon {
+          margin-top: 20rpx;
+          width: 30rpx;
+          height: 30rpx;
+        }
+      }
+    }
+  }
+}
+
+.body {
+  .topic {
+    display: inline-flex;
+    align-items: center;
+    padding: 4rpx 16rpx 4rpx 10rpx;
+    margin-top: 16rpx;
+    background-color: rgba(51, 51, 51, 0.1);
+    border-radius: 30rpx;
+    font-size: 24rpx;
+    font-weight: 500;
+    color: #1bad1b;
+    .icon {
+      width: 34rpx;
+      height: 34rpx;
+      margin-right: 8rpx;
+    }
+  }
+  .describe-wrap {
+    max-height: calc(30rpx * 3 * 1.6); // 最大高度设置成三行的高度
+    overflow: hidden;
+    font-weight: 400;
+    color: var(--text-color1);
+    .describe {
+      position: relative;
+      white-space: pre-line;
+      font-size: 34rpx;
+      line-height: 1.6;
+      margin-top: 10rpx;
+      text-overflow: ellipsis;
+      word-break: break-all;
+    }
+  }
+  .show-all {
+    color: var(--primary-color);
+    font-size: 30rpx;
+  }
+  .reset-describe {
+    max-height: calc(30rpx * 4 * 1.6); // 最大高度设置成四行的高度
+  }
+  .img-contarner {
+    display: flex;
+    margin-top: 18rpx;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 28rpx;
+  .item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    color: var(--text-color3);
+    font-size: 24rpx;
+    .count {
+      display: flex;
+      align-items: center;
+    }
+    .icon {
+      width: 40rpx;
+      height: 40rpx;
+      margin-right: 14rpx;
+    }
+  }
+}
+
+.three-line {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all; // 只对英文起作用，以字母作为依据，强制换行
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}

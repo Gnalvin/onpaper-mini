@@ -1,0 +1,43 @@
+<!--components/trend-item/cpn/img-wrap.wxml-->
+<wxs src="./index.wxs" module="utils" />
+
+<!-- 在详情页且图片1张以下的显示样式  -->
+<block wx:if="{{isInDetail && pics.length === 1 }}">
+  <view
+    class="one-img-wrap {{pics[0].width / pics[0].height < 0.45 ? 'one-limit' : ''}}"
+  >
+    <imageItem
+      style="width: 100%"
+      image-class="img"
+      src="{{pics[0].fileName}}"
+      mode="widthFix"
+      catch:tap="showImg"
+      data-url="{{pics[0].fileName}}"
+      data-index="{{0}}"
+    ></imageItem>
+    <view class="long-tip">长图</view>
+  </view>
+</block>
+
+<!-- 批量展示动态时的样式 -->
+<view
+  wx:else
+  class="img-show {{utils.formartClass(pics.length)}}"
+  style="{{ pics.length === 1 ? 'width:' + pics[0].width*2 + 'rpx; ' + 'height:' + pics[0].height*2  + 'rpx;' :''}}"
+>
+  <block wx:for="{{pics}}" wx:key="fileName">
+    <view class="img-wrap" wx:if="{{index < 9}}">
+      <imageItem
+        image-class="img"
+        src="{{item.preShowUrl}}"
+        mode="aspectFill"
+        catch:tap="showImg"
+        data-url="{{item.fileName}}"
+        data-index="{{index}}"
+      ></imageItem>
+      <view wx:if="{{index == 8 && pics.length > 9}}" class="more"
+        >+{{ pics.length - 9 }}</view
+      >
+    </view>
+  </block>
+</view>

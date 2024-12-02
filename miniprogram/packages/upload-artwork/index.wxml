@@ -1,0 +1,110 @@
+<!--packages/upload-artwork/index.wxml-->
+
+<view class="upload-page">
+  <view class="show-area">
+    <view
+      class="upload-tip"
+      wx:if="{{!urlList.length}}"
+      bind:tap="onClickAddImg"
+    >
+      <view class="title">点击选择图片</view>
+      <view class="other">请不要上传AI生成的绘画噢 '◡'</view>
+    </view>
+    <swiper
+      hidden="{{!urlList.length}}"
+      style="height: 100%"
+      bindchange="handleSwiperChange"
+      current="{{swiperIndex}}"
+      duration="{{swiperDuration}}"
+    >
+      <block wx:for="{{urlList}}" wx:key="url">
+        <swiper-item>
+          <image
+            class="pic"
+            src="{{item.url}}"
+            mode="aspectFit"
+            data-url="{{item.url}}"
+          ></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="indicator-area">
+    <scroll-view
+      class="scroll-view"
+      scroll-x
+      scroll-with-animation
+      enhanced
+      show-scrollbar="{{false}}"
+      id="scrollview"
+    >
+      <view
+        class="temp-width"
+        style="width: {{tempWidth}}px;"
+        wx:if="{{urlList.length}}"
+      ></view>
+      <block wx:for="{{urlList}}" wx:key="url">
+        <view
+          class="indicator-item"
+          data-index="{{index}}"
+          catch:tap="changeSwiperIndex"
+        >
+          <image class="pic" src="{{item.url}}" mode="aspectFill" />
+          <view
+            class="delete"
+            data-index="{{index}}"
+            catch:tap="onClickDeleteImg"
+          >
+            <image
+              class="icon"
+              src="/assets/img/close_white.svg"
+              mode="aspectFill"
+            />
+          </view>
+        </view>
+      </block>
+      <view
+        class="indicator-item"
+        catch:tap="onClickAddImg"
+        id="add-btn"
+        style="display: {{urlList.length === 15 ? 'none': 'inline-flex'}};"
+      >
+        <view class="add">
+          <image
+            class="icon"
+            src="/assets/img/add_white.svg"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+      <view
+        class="temp-width"
+        style="width: {{tempWidth}}px"
+        wx:if="{{urlList.length}}"
+      ></view>
+    </scroll-view>
+  </view>
+
+  <view class="next-bar" style="padding-bottom: {{safeBottomHight}}px;">
+    <view class="add" catch:tap="onClickAddImg">添加图片</view>
+    <OpButton
+      style="display: inline-flex"
+      text="下一步 {{urlList.length ? ' (' +urlList.length +')': ''}}"
+      width="200rpx"
+      height="80rpx"
+      fontSize="28rpx"
+      bind:click="goToEditeProfile"
+    ></OpButton>
+  </view>
+</view>
+
+<!-- 消息提示 -->
+<van-toast id="van-toast" />
+
+<!-- 消息提示 -->
+<van-dialog
+  id="van-dialog"
+  confirm-button-class="vant-button"
+  custom-class="vant-custom"
+>
+</van-dialog>

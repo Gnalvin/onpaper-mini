@@ -1,0 +1,60 @@
+<!--components/cropper/index.wxml-->
+<view class="image-cropper" id="image-cropper">
+  <view class="main" bindtap="_click">
+    <view class="content">
+      <view
+        class='content_top bg_gray {{_flag_bright?"":"bg_black"}}'
+        style="height:{{cut_top}}px;transition-property:{{_cut_animation?'':'background'}}"
+      ></view>
+      <view class="content_middle" style="height:{{cropHeight}}px;">
+        <view
+          class='content_middle_left bg_gray {{_flag_bright?"":"bg_black"}}'
+          style="width:{{cut_left}}px;transition-property:{{_cut_animation?'':'background'}}"
+        ></view>
+        <view
+          class="content_middle_middle"
+          style="width:{{cropWidth}}px;height:{{cropHeight}}px;transition-duration: .3s;transition-property:{{_cut_animation?'':'background'}};"
+        >
+          <view class="{{showBorder? 'border' : ''}} border-top-left"></view>
+          <view class="{{showBorder? 'border' : ''}} border-top-right"></view>
+          <view class="{{showBorder? 'border' : ''}} border-right-top"></view>
+          <view
+            class="{{showBorder? 'border' : ''}} border-right-bottom"
+          ></view>
+          <view
+            class="{{showBorder? 'border' : ''}} border-bottom-right"
+          ></view>
+          <view class="{{showBorder? 'border' : ''}} border-bottom-left"></view>
+          <view class="{{showBorder? 'border' : ''}} border-left-bottom"></view>
+          <view class="{{showBorder? 'border' : ''}} border-left-top"></view>
+        </view>
+        <view
+          class='content_middle_right bg_gray {{_flag_bright?"":"bg_black"}}'
+          style="transition-property:{{_cut_animation?'':'background'}}"
+        ></view>
+      </view>
+      <view
+        class='content_bottom bg_gray {{_flag_bright?"":"bg_black"}}'
+        style="transition-property:{{_cut_animation?'':'background'}}"
+      ></view>
+    </view>
+    <image
+      bindtouchstart="_start"
+      bindtouchmove="_move"
+      bindtouchend="_end"
+      style="width:{{imgShowWidth ? imgShowWidth + 'px' : 'auto'}};height:{{imgShowHeight ? imgShowHeight + 'px' : 'auto'}};transform:translate3d({{_img_left-imgShowWidth/2}}px,{{_img_top-imgShowHeight/2}}px,0) scale({{scale}});transition-duration:{{_cut_animation?.4:0}}s;"
+      class="img"
+      src="{{imgSrc}}"
+    ></image>
+  </view>
+  <canvas
+    type="2d"
+    id="canvas"
+    canvas-id="canvas"
+    style="width: {{cropWidth}}px; height: {{cropHeight}}px;"
+    class="image-cropper-canvas"
+  ></canvas>
+</view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

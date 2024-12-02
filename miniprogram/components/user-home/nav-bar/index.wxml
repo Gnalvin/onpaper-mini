@@ -1,0 +1,4 @@
+<!--components/user-home/nav-bar/index.wxml-->
+<view class="nav-bar">
+  <Tabs tabs="{{tabs}}" bind:click="onTabClick" scrollable="{{false}}"></Tabs>
+</view>

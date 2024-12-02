@@ -1,0 +1,23 @@
+<!--components/water-flow/index.wxml-->
+<view class="waterfall-wrap" style="gap: {{gap}}rpx;padding: 0 {{padding}}rpx;">
+  <view class="waterfall-column">
+    <view class="left-container" id="left">
+      <block wx:for="{{leftList}}" wx:key="index">
+        <RectangleArtwork
+          noAvatarJump="{{noAvatarJump}}"
+          artwork="{{item}}"
+        ></RectangleArtwork>
+      </block>
+    </view>
+  </view>
+  <view class="waterfall-column">
+    <view class="right-container" id="right">
+      <block wx:for="{{rightList}}" wx:key="index">
+        <RectangleArtwork
+          noAvatarJump="{{noAvatarJump}}"
+          artwork="{{item}}"
+        ></RectangleArtwork>
+      </block>
+    </view>
+  </view>
+</view>

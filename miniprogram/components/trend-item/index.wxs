@@ -1,0 +1,18 @@
+//删除/私密/不是关注 不展示动态
+function isShowTrend(trendItem, isInDetail) {
+  if (trendItem.isDelete) {
+    return false
+  }
+  if (trendItem.whoSee == 'privacy') {
+    return trendItem.isOwner
+  }
+  if (trendItem.whoSee == 'onlyFans') {
+    // isInDetail 在详情页可以看 但要关注
+    return isInDetail || trendItem.interact.isFocusAuthor || trendItem.isOwner
+  }
+  return true
+}
+
+module.exports = {
+  isShowTrend: isShowTrend
+}

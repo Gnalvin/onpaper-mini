@@ -1,0 +1,39 @@
+/* pages/tabBar/user/subpage/edit-profile/index.wxss */
+.avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 60rpx 0;
+  background-color: var(--bgc1);
+  .avatar {
+    position: relative;
+  }
+  .icon {
+    position: absolute;
+    background-color: #000;
+    padding: 8rpx;
+    border-radius: 100%;
+    width: 25rpx;
+    height: 25rpx;
+    bottom: 28rpx;
+    right: 0rpx;
+  }
+}
+
+.title-style {
+  color: var(--text-color3);
+}
+.content-style {
+  --cell-value-color: var(--text-color2);
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: hidden; /* 隐藏溢出部分 */
+  text-overflow: ellipsis; /* 溢出时显示省略号 */
+}
+
+.banner-wrapper {
+  display: flex;
+  .banner {
+    max-height: 200rpx;
+    width: 100%;
+    border-radius: 10rpx;
+  }
+}

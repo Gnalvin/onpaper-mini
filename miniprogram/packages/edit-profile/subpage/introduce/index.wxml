@@ -1,0 +1,26 @@
+<!--pages/edit-profile/subpage/introduce/index.wxml-->
+<view class="input-wrapper">
+  <textarea
+    auto-height="true"
+    placeholder="请介绍一下自己吧～"
+    value="{{introduce}}"
+    maxlength="800"
+    bindinput="handleInput"
+  ></textarea>
+  <view class="max-tip">
+    <text>{{wordCount}} / 800</text>
+  </view>
+</view>
+
+<view class="save-btn">
+  <OpButton
+    text="保存内容"
+    width="420rpx"
+    height="80rpx"
+    bind:click="handleSave"
+    isDisable="{{introduce === oldIntroduce}}"
+  ></OpButton
+></view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

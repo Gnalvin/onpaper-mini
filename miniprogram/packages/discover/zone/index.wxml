@@ -1,0 +1,16 @@
+<!--packages/discover/zone/index.wxml-->
+<van-sticky>
+  <view class="tabs">
+    <Tabs tabs="{{tabs}}" bind:click="onTabClick"></Tabs>
+  </view>
+</van-sticky>
+
+<view class="art-wrap">
+  <block wx:for="{{artworks}}" wx:key="artworkId">
+    <SquareArtwork artwork="{{item}}"></SquareArtwork>
+  </block>
+</view>
+<view wx:if="{{isEnd}}" class="end"> - The End - </view>
+<view class="loading" wx:else="">
+  <van-loading color="var(--text-color2)" size="30rpx" />
+</view>

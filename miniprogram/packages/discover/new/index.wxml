@@ -1,0 +1,8 @@
+<!--packages/discover/new/index.wxml-->
+
+<block wx:for="{{trends}}" wx:key="trendId">
+  <TrendItem trend="{{item}}"></TrendItem>
+</block>
+<view class="loading">
+  <van-loading color="var(--text-color2)" size="30rpx" />
+</view>

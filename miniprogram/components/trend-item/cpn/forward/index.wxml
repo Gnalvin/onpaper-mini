@@ -1,0 +1,20 @@
+<!--components/trend-item/cpn/forward/index.wxml-->
+<view class="forward-wrapprr" wx:if="{{forward}}">
+  <view class="no-see" wx:if="{{forward.isDelete}}">转发的动态已被删除</view>
+  <view class="no-see" wx:elif="{{forward.whoSee == 'privacy'}}">
+    转发的动态不可见
+  </view>
+  <view class="forward" wx:else catch:tap="goToDeatil">
+    <view class="nick">@{{ forward.userName }}</view>
+    <block wx:if="{{forward.type == 'tr' && forward.topic.topicId}}">
+      <view class="topic">
+        <image class="icon" src="../../../../assets/img/topic.svg"></image>
+        <view class="topic-text">{{ forward.topic.text }}</view>
+      </view>
+    </block>
+    <view class="intro">
+      <view class="intro-text">{{forward.intro}}</view>
+    </view>
+    <ImgWrap wx:if="{{forward.pics.length}}" pics="{{forward.pics}}"></ImgWrap>
+  </view>
+</view>

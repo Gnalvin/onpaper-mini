@@ -1,0 +1,109 @@
+<!--packages/user-profile/index.wxml-->
+<view class="profile-page">
+  <view class="area-wrap">
+    <view class="title">基本资料</view>
+    <view class="item">
+      <view class="label">用户名</view>
+      <view class="text">{{profile.userName}}</view>
+    </view>
+    <view class="item">
+      <view class="label">性别</view>
+      <view class="text">{{profile.sex}}</view>
+    </view>
+    <view class="item" wx:if="{{profile.birthday}}">
+      <view class="label">生日</view>
+      <view class="text">{{profile.birthday}}</view>
+    </view>
+    <view class="item" wx:if="{{profile.address}}">
+      <view class="label">居住地</view>
+      <view class="text">{{profile.address}}</view>
+    </view>
+    <view class="item" wx:if="{{profile.createStyle}}">
+      <view class="label">创作风格</view>
+      <view class="text">{{profile.createStyle}}</view>
+    </view>
+    <view class="item" wx:if="{{profile.expectWork}}">
+      <view class="label">倾向工作</view>
+      <view class="text">{{profile.expectWork}}</view>
+    </view>
+  </view>
+
+  <view class="area-wrap">
+    <view class="title"
+      >社交链接 <text class="tip" wx:if="{{haveSNS}}">(点击复制)</text>
+    </view>
+    <view wx:if="{{!haveSNS}}" style="color: var(--text-color3)">未填写</view>
+    <view
+      class="item"
+      wx:if="{{profile.QQ}}"
+      bind:tap="handleCopy"
+      data-text="{{profile.QQ}}"
+    >
+      <view class="label">QQ</view>
+      <view class="text">{{profile.QQ}}</view>
+    </view>
+    <view
+      class="item"
+      wx:if="{{profile.WeChat}}"
+      bind:tap="handleCopy"
+      data-text="{{profile.WeChat}}"
+    >
+      <view class="label">微信</view>
+      <view class="text">{{profile.WeChat}}</view>
+    </view>
+    <view
+      class="item"
+      wx:if="{{profile.workEmail}}"
+      bind:tap="handleCopy"
+      data-text="{{profile.workEmail}}"
+    >
+      <view class="label">邮箱</view>
+      <view class="text">{{profile.workEmail}}</view>
+    </view>
+    <view
+      class="item"
+      wx:if="{{profile.Weibo}}"
+      bind:tap="handleCopy"
+      data-text="{{'www.weibo.com/u/'+profile.Weibo}}"
+    >
+      <view class="label">微博</view>
+      <view class="text one-line">weibo.com/u/{{profile.Weibo}}</view>
+    </view>
+    <view
+      class="item"
+      wx:if="{{profile.Bilibili}}"
+      bind:tap="handleCopy"
+      data-text="{{'space.bilibili.com/'+profile.Bilibili}}"
+    >
+      <view class="label">哔哩哔哩</view>
+      <view class="text one-line">space.bilibili.com/{{profile.Bilibili}}</view>
+    </view>
+
+    <view
+      class="item"
+      wx:if="{{profile.Pixiv}}"
+      bind:tap="handleCopy"
+      data-text="{{'pixiv.net/users/'+profile.Pixiv}}"
+    >
+      <view class="label">Pixiv</view>
+      <view class="text one-line">pixiv.net/users/{{profile.Pixiv}}</view>
+    </view>
+    <view
+      class="item"
+      wx:if="{{profile.Twitter}}"
+      bind:tap="handleCopy"
+      data-text="{{'twitter.com/'+profile.Twitter}}"
+    >
+      <view class="label no-line">推特</view>
+      <view class="text one-line">twitter.com/{{profile.Twitter}}</view>
+    </view>
+  </view>
+
+  <view class="area-wrap">
+    <view class="title">个人介绍</view>
+    <view wx:if="{{!profile.introduce}}" style="color: var(--text-color3)">
+      未填写
+    </view>
+    <text class="intro" wx:else="">{{profile.introduce}}</text>
+  </view>
+</view>

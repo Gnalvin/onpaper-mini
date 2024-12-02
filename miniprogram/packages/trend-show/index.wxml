@@ -1,0 +1,104 @@
+<!--packages/trend-show/index.wxml-->
+<wxs src="./handle.wxs" module="handle" />
+
+<!-- 动态已删除或不可见 -->
+<view class="no-see" wx:if="{{isNoExist}}">
+  <view>动态已删除或不可见</view>
+  <view class="tip">3 秒后将返回上一页</view>
+</view>
+
+<view class="trend-show-wrapper" wx:if="{{trendInfo}}">
+  <!-- 动态展示 -->
+  <TrendItem
+    trend="{{trendInfo}}"
+    bind:foucsUser="handleFocusUser"
+    bind:like="handlePostTrendLike"
+    bind:comment="handleShowReplyInput"
+    isInDetail
+  ></TrendItem>
+
+  <!-- 评论展示区域 -->
+  <view class="comment-wrapper">
+    <!-- 关闭了评论区 -->
+    <view class="no-comment" wx:if="{{trendInfo.comment === 'close'}}">
+      <view class="text">由于作者设置, 评论暂时关闭</view>
+    </view>
+    <!-- 目前0个评论 -->
+    <view class="no-comment" wx:elif="{{zeroComment}}">
+      <image class="icon" src="/assets/img/no_comment.svg" mode="aspectFill" />
+      <view class="text">快来发表你的评论吧</view>
+    </view>
+
+    <block wx:if="{{trendInfo.comment !== 'close'}}">
+      <view class="total" wx:if="{{trendInfo.count.comments}}">
+        共 {{trendInfo.count.comments}} 条评论
+      </view>
+      <block wx:for="{{comments}}" wx:key="cId">
+        <CommentItem
+          id="c{{item.cId}}"
+          isCanComment="{{handle.isCanComment(trendInfo)}}"
+          comment="{{item}}"
+          bind:reply="handleShowReplyInput"
+          bind:like="handlePostCommentLike"
+        ></CommentItem>
+      </block>
+      <view wx:if="{{commentEnd && !zeroComment}}" class="end">
+        - The End -
+      </view>
+      <view wx:elif="{{!commentEnd}}" class="loading">
+        <van-loading color="var(--text-color2)" size="30rpx" />
+      </view>
+    </block>
+  </view>
+
+  <view
+    class="{{tempHeight ? '' :'temp-height'}}"
+    style="height:{{tempHeight}}px;"
+  ></view>
+</view>
+
+<!-- 评论输入框 -->
+<CommentInput
+  wx:if="{{trendInfo}}"
+  id="comment-input"
+  ownId="{{trendInfo.trendId}}"
+  replyUserId="{{trendInfo.userId}}"
+  ownType="tr"
+  bind:success="handlePostCommentSuccess"
+  bind:like="handlePostTrendLike"
+  bind:blur="handleBlur"
+  interact="{{trendInfo.interact}}"
+  likes="{{trendInfo.count.likes}}"
+  comments="{{trendInfo.count.comments}}"
+  collects="{{trendInfo.count.collects}}"
+  comSetting="{{trendInfo.comment}}"
+  isOwner="{{trendInfo.isOwner}}"
+></CommentInput>
+
+<!-- 如果仅粉丝可见 遮罩层-->
+<van-overlay
+  z-index="999"
+  custom-class="custom-overlay"
+  root-portal
+  lock-scroll
+  show="{{ trendInfo.whoSee ==='onlyFans' && !trendInfo.isOwner && !trendInfo.interact.isFocusAuthor}}"
+>
+  <view class="onlyfans-wrapper">
+    <Avatar
+      style="display: flex"
+      avatarName="{{trendInfo.avatar ? trendInfo.avatar : ''}}"
+      uid="{{trendInfo.userId ? trendInfo.userId : ''}}"
+      width="180rpx"
+    ></Avatar>
+    <view class="username">{{trendInfo.userName}}</view>
+    <OpButton
+      fontSize="32rpx"
+      bgcColor="#1f6ce0"
+      text="关注"
+      width="220rpx"
+      bind:click="handleFocusUser"
+      login
+    ></OpButton>
+    <div class="tip">该动态仅允许粉丝可见</div>
+  </view>
+</van-overlay>

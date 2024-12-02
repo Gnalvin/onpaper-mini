@@ -1,0 +1,64 @@
+/* components/comment-input/index.wxss */
+.comment-input-item {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
+  border-top: 1rpx solid var(--border-color1);
+  background-color: var(--bgc1);
+}
+.comment-input {
+  display: flex;
+  align-items: center;
+  padding: 26rpx 10rpx;
+}
+.align-items {
+  align-items: flex-end;
+}
+
+.weui-input {
+  flex: 1;
+  margin-right: 10rpx;
+  padding: 20rpx 24rpx;
+  background-color: var(--bgc3);
+  margin-left: 20rpx;
+  border-radius: 20px;
+  text-overflow: ellipsis;
+  line-height: 32rpx;
+}
+
+.handle-wrapper {
+  display: flex;
+  flex-shrink: 0;
+  .item {
+    display: flex;
+    align-items: center;
+    margin: 0 10rpx;
+    .icon {
+      width: 45rpx;
+      height: 45rpx;
+      margin-right: 10rpx;
+    }
+    .count {
+      text-align: center;
+      line-height: 50rpx;
+      font-weight: 500;
+      color: var(--color-regular);
+    }
+  }
+  .send {
+    position: relative;
+    width: 140rpx;
+  }
+}
+
+.custom-overlay {
+  background-color: transparent !important;
+}
+
+.temp-view {
+  transition: height 0.2s ease-in-out;
+}

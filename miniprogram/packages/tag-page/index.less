@@ -1,0 +1,82 @@
+/* packages/tag-page/index.wxss */
+page {
+  background-color: var(--bgc1);
+}
+.head-area {
+  display: flex;
+  padding: 30rpx 40rpx;
+  .cover {
+    width: 110rpx;
+    height: 110rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 400;
+    font-size: 65rpx;
+    border-radius: 10rpx;
+    background-color: var(--surface-color1);
+    border: 1px solid var(--border-color1);
+    margin-right: 30rpx;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .tag-name {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 36rpx;
+    }
+    .total {
+      font-size: 30rpx;
+      font-family: system-ui;
+    }
+  }
+}
+
+.nav-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 30rpx 30rpx 20rpx;
+  .item {
+    font-size: 32rpx;
+    padding-bottom: 10rpx;
+    border-bottom: 4rpx solid transparent;
+  }
+  .active {
+    font-weight: 500;
+    border-bottom: 4rpx solid var(--primary-color);
+  }
+  .sort {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 12rpx;
+    font-size: 28rpx;
+    font-weight: 500;
+    color: var(--text-color3);
+    .icon {
+      width: 36rpx;
+      height: 36rpx;
+      margin-left: 20rpx;
+    }
+  }
+}
+
+.end {
+  padding: 35rpx 0;
+  text-align: center;
+  font-size: 24rpx;
+  font-weight: 400;
+  color: var(--text-color3);
+}
+.loading {
+  padding: 50rpx 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

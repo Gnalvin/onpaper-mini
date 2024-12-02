@@ -1,0 +1,54 @@
+<!--packages/comment-detail/index.wxml-->
+
+<!-- 评论已删除 -->
+<view class="is-delete" wx:if="{{rootComment.isDelete}}">
+  该评论已删除或顶层评论不存在
+</view>
+
+<block wx:elif="{{rootComment}}">
+  <view class="root-comment">
+    <CommentItem
+      comment="{{rootComment}}"
+      isCanComment="{{isCanComment}}"
+      isChildFloor
+      bind:reply="inputFocus"
+      bind:like="handlePostCommentLike"
+    ></CommentItem>
+  </view>
+
+  <view class="cut-off-line"></view>
+
+  <view class="child-comment" wx:if="{{!zeroComment}}">
+    <block wx:for="{{childComments}}" wx:key="cId">
+      <CommentItem
+        id="c{{item.cId}}"
+        comment="{{item}}"
+        isCanComment="{{isCanComment}}"
+        bind:reply="handleShowReplyInput"
+        bind:like="handlePostCommentLike"
+      ></CommentItem>
+    </block>
+    <view wx:if="{{commentEnd}}" class="end"> - The End -</view>
+    <view wx:else class="loading">
+      <van-loading color="var(--text-color2)" size="30rpx" />
+    </view>
+    <view
+      class="{{tempHeight ? '' :'temp-height'}}"
+      style="height:{{tempHeight}}px;"
+    ></view>
+  </view>
+  <view wx:else class="zero"> 没有其他回复 </view>
+  <!-- 评论输入框 -->
+  <CommentInput
+    wx:if="{{rootComment && isCanComment}}"
+    id="comment-input"
+    placeholder="回复 @{{rootComment.userName}}"
+    isInDetailPage="{{true}}"
+    ownId="{{rootComment.ownId}}"
+    replyUserId="{{rootComment.userId}}"
+    ownType="{{rootComment.ownType}}"
+    rootId="{{rootComment.cId}}"
+    bind:success="handlePostCommentSuccess"
+    bind:blur="handleBlur"
+  ></CommentInput>
+</block>

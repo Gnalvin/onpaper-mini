@@ -1,0 +1,102 @@
+<!--pages/tabBar/message/index.wxml-->
+
+<!-- 提醒用户登陆 -->
+<view class="no-login" wx:if="{{!isLogin}}">
+  <view class="no-tip">你还没有登陆哦 õ.Õ?</view>
+  <OpButton
+    text="前往登陆"
+    width="300rpx"
+    height="80rpx"
+    bind:click="handleGotoLogin"
+  ></OpButton>
+</view>
+
+<block wx:else>
+  <!-- 通知分类导航栏 -->
+  <view class="notify-container">
+    <view class="item" data-notify="like" bind:tap="handleGoToNotify">
+      <image
+        src="/assets/img/like_normal_black.svg"
+        class="icon"
+        mode="aspectFill"
+      />
+      <view class="text">赞和收藏</view>
+      <view class="unread" wx:if="{{unread.like + unread.collect}}">
+        {{ unread.like + unread.collect }}
+      </view>
+    </view>
+    <view class="item" data-notify="focus" bind:tap="handleGoToNotify">
+      <image
+        src="/assets/img/personal_collection.svg"
+        class="icon"
+        mode="aspectFill"
+      />
+      <view class="text">新增关注</view>
+      <view class="unread" wx:if="{{unread.follow}}">{{ unread.follow }}</view>
+    </view>
+    <view class="item" data-notify="comment" bind:tap="handleGoToNotify">
+      <image
+        src="/assets/img/comment_emoji_black.svg"
+        class="icon"
+        mode="aspectFill"
+      />
+      <view class="text">评论我的</view>
+      <view class="unread" wx:if="{{unread.comment + unread.at}}">
+        {{ unread.comment + unread.at }}
+      </view>
+    </view>
+    <view class="item" data-notify="commission" bind:tap="handleGoToNotify">
+      <image src="/assets/img/gift.svg" class="icon" mode="aspectFill" />
+      <view class="text">约稿信息</view>
+      <view class="unread" wx:if="{{unread.commission}}">
+        {{ unread.commission }}
+      </view>
+    </view>
+  </view>
+
+  <!-- 聊天会话列表 -->
+  <view class="chat-list">
+    <view
+      class="chat-item"
+      wx:for="{{chatList}}"
+      wx:key="chatId"
+      bind:tap="handleGoToChat"
+      data-chat="{{item}}"
+    >
+      <view class="left">
+        <view class="unread" wx:if="{{item.unread}}">{{ item.unread }}</view>
+        <Avatar
+          bind:click="handleGoToChat"
+          data-chat="{{item}}"
+          style="display: flex"
+          avatarName="{{item.receiver.avatar ? item.receiver.avatar : ''}}"
+          uid="{{item.receiver.userId ? item.receiver.userId : ''}}"
+          width="90rpx"
+          noJump
+        ></Avatar>
+      </view>
+      <view class="right">
+        <view class="name-time">
+          <text class="name one-line">{{ item.receiver.userName }}</text>
+          <text class="time">{{ item.message[0].sendTime }}</text>
+        </view>
+        <view class="content">
+          <view class="text one-line">
+            {{ item.message[0].msgType == 'text' ? item.message[0].content :
+            '[图片]' }}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{zeroChat}}" class="no-chat">
+      {{'暂时还没有收到私信 (´･_･`)'}}
+    </view>
+    <!-- 大于五条消息时 如果没有更多了 显示提示 -->
+    <view wx:if="{{chatListEnd && chatList.length >= 5}}" class="end">
+      - The End -
+    </view>
+    <view wx:elif="{{!chatListEnd}}" class="loading">
+      <van-loading color="var(--text-color2)" size="30rpx" />
+    </view>
+  </view>
+</block>

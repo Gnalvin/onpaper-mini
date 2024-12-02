@@ -1,0 +1,17 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "van-nav-bar": "@vant/weapp/nav-bar/index",
+    "Avatar": "/components/avatar",
+    "Indicator": "/components/indicator",
+    "IndicatorItem":"/components/indicator/indicator-item",
+    "OpButton": "/components/op-button",
+    "SlideShow":"/components/slide-show",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "CommentItem":"/components/comment-floor/index",
+    "CommentInput":"/components/comment-input/index",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-overlay": "@vant/weapp/overlay/index",
+    "imageItem": "/components/image-item"
+  }
+}

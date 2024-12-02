@@ -1,0 +1,69 @@
+/* components/artwork/rectangle/index.wxss */
+.rectangle-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 8rpx;
+  border-radius: 8rpx;
+}
+
+.pic {
+  border-radius: 8rpx;
+}
+
+.footer {
+  padding: 16rpx 20rpx 26rpx;
+  .title {
+    font-size: 28rpx;
+    line-height: 1.4;
+    font-weight: 500;
+    margin-bottom: 12rpx;
+  }
+  .author-wrapper {
+    display: flex;
+    justify-content: space-between;
+    font-size: 24rpx;
+    line-height: 48rpx;
+    margin-top: 10rpx;
+    color: var(--color-regular);
+    .avatar {
+      display: flex;
+      margin-right: 16rpx;
+    }
+    .author {
+      margin-right: 24rpx;
+    }
+    .like-wrapper {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      .icon {
+        width: 28rpx;
+        height: 28rpx;
+        margin-right: 10rpx;
+      }
+    }
+  }
+}
+
+// 隐藏文本
+.text-hidden {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all; // 只对英文起作用，以字母作为依据，强制换行
+  line-break: anywhere; // 任意位置都可以作为换行点，包括任意的标点。
+  white-space: normal !important;
+}
+
+// 显示一行
+.one-line {
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.two-line {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

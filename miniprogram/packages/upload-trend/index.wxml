@@ -1,0 +1,161 @@
+<!--packages/upload-trend/index.wxml-->
+<wxs module="handle" src="./handle.wxs"></wxs>
+
+<page-meta page-style="{{ isShowTopicPop ? 'overflow: hidden;' : '' }}" />
+<!-- 作品简介 -->
+<view class="introduce">
+  <textarea
+    class="textarea"
+    placeholder="有什么想和大家分享的～"
+    value="{{text}}"
+    maxlength="350"
+    bindinput="onTextInput"
+    show-confirm-bar="{{false}}"
+  ></textarea>
+  <view class="max-tip" wx:if="{{wordCount > 300}}">
+    <text>{{wordCount}} / 350</text>
+  </view>
+</view>
+
+<view class="setting">
+  <view class="item" bind:tap="handleShowTopicPop">
+    <block wx:if="{{topic}}">
+      <image class="icon" src="/assets/img/topic.svg" mode="aspectFill" />
+      <view class="topic-text">{{topic.text}}</view>
+      <view class="delete" catch:tap="onDelTopic">
+        <image
+          class="icon"
+          src="/assets/img/close-fill.svg"
+          mode="aspectFill"
+        />
+      </view>
+    </block>
+    <block wx:else="">
+      <image class="icon" src="/assets/img/topic_gray.svg" mode="aspectFill" />
+      <view>话题</view>
+    </block>
+  </view>
+  <view class="item" bind:tap="handleShowWhoSee">
+    <image
+      class="icon"
+      src="/assets/img/share_heart_gray.svg"
+      mode="aspectFill"
+    />
+    <view>{{whoSee.text}}</view>
+  </view>
+</view>
+
+<!-- 排序图片 -->
+<view class="sort-area">
+  <SortImg
+    urlList="{{urlList}}"
+    bind:addImg="addTrendImg"
+    bind:changeList="saveNewList"
+    bind:delImg="delTrendImg"
+    showDelIndex="{{needDelImg}}"
+  ></SortImg>
+  <view class="tip">Tips: 可长按拖拽排序</view>
+</view>
+
+<!-- 临时高度 -->
+<view class="temp-height"></view>
+
+<!-- 完成 -->
+<view class="over-bar" style="padding-bottom: {{safeBottomHight}}px;">
+  <view class="tip" bind:tap="handleShowSmallTip">
+    <view class="icon-wrap">
+      <image class="icon" src="/assets/img/info.svg" mode="aspectFill" />
+    </view>
+    <view>小贴士</view>
+  </view>
+  <OpButton
+    class="btn"
+    text="发布动态"
+    width="85%"
+    height="80rpx"
+    fontSize="28rpx"
+    bind:click="uploadFormData"
+  ></OpButton>
+</view>
+
+<!-- 选择公开范围弹窗 -->
+<van-popup show="{{isShowPublic}}" position="bottom" round>
+  <van-picker
+    title="公开范围"
+    show-toolbar
+    columns="{{ whoSeeSetting}}"
+    bind:cancel="handleShowWhoSee"
+    bind:confirm="changeWhoSee"
+  />
+</van-popup>
+
+<!-- 设置话题弹窗 -->
+<van-popup
+  show="{{isShowTopicPop}}"
+  position="bottom"
+  round
+  closeable
+  bind:close="handleShowTopicPop"
+>
+  <view class="topic-setting">
+    <view class="title">添加话题</view>
+    <view class="input-wrapper">
+      <input
+        class="input"
+        maxlength="15"
+        confirm-hold
+        placeholder="搜索话题"
+        value="{{topicString}}"
+        bindinput="onTopicInput"
+        bindconfirm="onTopicInputConfirm"
+      />
+    </view>
+    <view class="relevant">
+      <view
+        class="suggest line"
+        wx:if="{{handle.isShowCreatTopic(relevantTopic,topicString)}}"
+        bind:tap="onChoseTopic"
+        data-text="{{topicString}}"
+      >
+        <view class="text"># {{topicString}}</view>
+        <view class="create">创建话题</view>
+      </view>
+      <view
+        class="suggest"
+        wx:for="{{relevantTopic}}"
+        wx:key="topicId"
+        data-text="{{item.text}}"
+        bind:tap="onChoseTopic"
+      >
+        <view class="text"># {{item.text}}</view>
+        <view class="count">{{item.count}} 次讨论</view>
+      </view>
+    </view>
+  </view>
+</van-popup>
+
+<!-- 上传等待页面 -->
+<van-overlay
+  custom-class="custom-overlay"
+  show="{{ isShowUploadIng }}"
+  z-index="999"
+>
+  <view class="uploading-wrap">
+    <view class="container">
+      <view class="tip">正在保存数据...</view>
+      <view>请不要关闭页面</view>
+      <view class="bar"></view>
+    </view>
+  </view>
+</van-overlay>
+
+<!-- 消息提示 -->
+<van-toast id="van-toast" />
+
+<!-- 消息提示 -->
+<van-dialog
+  id="van-dialog"
+  confirm-button-class="vant-button"
+  custom-class="vant-custom"
+>
+</van-dialog>

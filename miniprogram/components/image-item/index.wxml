@@ -1,0 +1,11 @@
+<!--components/image-item/index.wxml-->
+<image
+  wx:if="{{src}}"
+  class="image-item image-class"
+  style="opacity: {{animation ? 0 : 1}};"
+  src="{{src}}"
+  mode="{{mode}}"
+  lazy-load
+  bindload="handleImgLoad"
+  binderror="handleImgErr"
+></image>

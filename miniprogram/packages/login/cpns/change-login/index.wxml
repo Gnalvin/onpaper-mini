@@ -1,0 +1,40 @@
+<!--pages/login/cpns/change-login/index.wxml-->
+<wxs src="../../../../utils/js.wxs" module="js" />
+<view class="other-login">
+  <view
+    class="icon-wrap phone"
+    wx:if="{{js.indexOf(showList,'phone') != -1}}"
+    bind:tap="handleRouterPush"
+    data-name="phone"
+  >
+    <image
+      class="icon"
+      src="../../../../assets/img/phone.svg"
+      mode="widthFix"
+    />
+  </view>
+  <view
+    class="icon-wrap wechat"
+    wx:if="{{js.indexOf(showList,'wechat') != -1}}"
+    bind:tap="handleRouterPush"
+    data-name="wechat"
+  >
+    <image
+      class="icon"
+      src="../../../../assets/img/lightning.svg"
+      mode="widthFix"
+    />
+  </view>
+  <view
+    class="icon-wrap email"
+    wx:if="{{js.indexOf(showList,'email') != -1}}"
+    bind:tap="handleRouterPush"
+    data-name="email"
+  >
+    <image
+      class="icon"
+      src="../../../../assets/img/mail-fill-white.svg"
+      mode="widthFix"
+    />
+  </view>
+</view>

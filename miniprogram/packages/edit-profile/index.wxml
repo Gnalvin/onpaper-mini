@@ -1,0 +1,115 @@
+<!--pages/tabBar/user/subpage/edit-profile/index.wxml-->
+<wxs src="./utils/format.wxs" module="fmt" />
+
+<view class="avatar-wrapper">
+  <view class="avatar" bind:tap="goToEditAvatar">
+    <Avatar
+      bind:click="goToEditAvatar"
+      avatarName="{{profile.avatarName ? profile.avatarName : ''}}"
+      uid="{{profile.userId ? profile.userId : ''}}"
+      width="185rpx"
+      noJump
+    ></Avatar>
+    <image class="icon" src="../../assets/img/camera_white_line.svg" mode="" />
+  </view>
+</view>
+
+<view class="profile">
+  <van-cell
+    title="昵称"
+    size="large"
+    title-class="title-style"
+    value-class="content-style"
+    bind:click="goToEditName"
+    is-link
+    value="{{profile.userName}}"
+  />
+
+  <van-cell
+    title="性别"
+    size="large"
+    title-class="title-style"
+    value-class="content-style"
+    bind:click="handleShowSexPic"
+    is-link
+    value="{{fmt.formatSex(profile.sex)}}"
+  />
+  <van-popup show="{{isShowSexPic}}" position="bottom" round>
+    <van-picker
+      title="选择性别"
+      show-toolbar
+      columns="{{ [{ text: '男', value: 'man' },{ text: '女', value: 'woman' },{ text: '保密', value: 'privacy' }] }}"
+      bind:cancel="handleShowSexPic"
+      bind:confirm="changeSex"
+    />
+  </van-popup>
+
+  <van-cell
+    title="生日"
+    size="large"
+    title-class="title-style"
+    value-class="{{profile.birthday.Time ? 'content-style':''}}"
+    bind:click="handleShowBirthdayPic"
+    is-link
+    value="{{profile.birthday.Time ? profile.birthday.Time : '选择生日' }}"
+  >
+  </van-cell>
+  <van-popup show="{{isShowBirthdayPic}}" position="bottom" round>
+    <van-datetime-picker
+      type="date"
+      value="{{ currentDate }}"
+      bind:cancel="handleShowBirthdayPic"
+      bind:confirm="changeBirthday"
+      max-date="{{currentDate}}"
+      min-date="{{0}}"
+    />
+  </van-popup>
+
+  <van-cell
+    title="地区"
+    size="large"
+    title-class="title-style"
+    value-class="{{profile.address ? 'content-style':''}}"
+    bind:click="handleShowAreaPic"
+    is-link
+    value="{{profile.address? profile.address : '选择地区'}}"
+  />
+  <van-popup show="{{isShowAreaPic}}" position="bottom" round>
+    <van-area
+      area-list="{{ areaList }}"
+      columns-num="{{ 2 }}"
+      title="选择地区"
+      bind:cancel="handleShowAreaPic"
+      bind:confirm="changeArea"
+    />
+  </van-popup>
+
+  <van-cell
+    title="简介"
+    size="large"
+    title-class="title-style"
+    value-class="{{profile.introduce ? 'content-style':''}}"
+    is-link
+    bind:click="goToEditIntroduce"
+    value="{{profile.introduce ?profile.introduce:'填写简介' }}"
+  />
+  <van-cell
+    title-class="title-style"
+    value-class="{{profile.introduce ? 'content-style':''}}"
+    title="背景图"
+    size="large"
+    is-link
+    center
+    bind:click="goToEditBanner"
+  >
+    <view solt="label" class="banner-wrapper" wx:if="{{profile.bannerName}}">
+      <image class="banner" src="{{profile.bannerName}}" mode="aspectFill" />
+    </view>
+    <view solt="label" style="color: var(--text-color3)" wx:else>
+      设置背景图</view
+    >
+  </van-cell>
+</view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

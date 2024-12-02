@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-overlay": "@vant/weapp/overlay/index",
+    "OpButton": "/components/op-button",
+    "Avatar": "/components/avatar",
+    "van-transition": "@vant/weapp/transition/index"
+  }
+}

@@ -1,0 +1,40 @@
+<!--pages/tabBar/user/subpage/setting/index.wxml-->
+<view style="margin-top: 30rpx">
+  <van-cell-group inset>
+    <van-cell
+      bind:click="hanldePrivacyPolicy"
+      title="隐私政策"
+      is-link
+      size="large"
+    />
+    <van-cell center size="large" custom-class="vant-feedback">
+      <view slot="title" class="feedback-warpper">
+        <button open-type="feedback" class="feedback">
+          帮助与客服 <van-icon name="arrow" color="#969799" />
+        </button>
+      </view>
+    </van-cell>
+  </van-cell-group>
+</view>
+
+<view style="margin-top: 30rpx">
+  <van-cell-group inset>
+    <van-cell
+      custom-class="vant-title"
+      bind:click="handleChangeAccount"
+      title="切换账户"
+      size="large"
+    />
+  </van-cell-group>
+</view>
+
+<view style="margin-top: 30rpx">
+  <van-cell-group inset>
+    <van-cell
+      custom-class="vant-title"
+      bind:click="handleExitLogin"
+      title="退出登陆"
+      size="large"
+    />
+  </van-cell-group>
+</view>

@@ -1,0 +1,59 @@
+<!--components/user-card/index.wxml-->
+<wxs src="../../utils/format.wxs" module="fmt" />
+
+<view class="user-card">
+  <view class="header">
+    <Avatar
+      style="display: flex"
+      class="avatar"
+      avatarName="{{userInfo.avatar ? userInfo.avatar  : ''}}"
+      uid="{{userInfo.userId ? userInfo.userId : ''}}"
+      width="105rpx"
+    ></Avatar>
+    <view class="name-data">
+      <view class="name-wrapper">
+        <view class="name one-line" bind:tap="handleGoToUserHome">
+          {{userInfo.userName}}
+        </view>
+        <!-- 标签 -->
+        <view class="v-status" wx:if="{{userInfo.vStatus}}">
+          <image
+            wx:if="{{userInfo.vStatus == 1}}"
+            class="icon"
+            src="/assets/img/v_tag_user.svg"
+            mode="aspectFill"
+          ></image>
+          <image
+            wx:else
+            class="icon"
+            src="/assets/img/v_tag_org.svg"
+            mode="aspectFill"
+          ></image>
+        </view>
+      </view>
+      <!-- 统计数据 -->
+      <view class="data">
+        <text class="likes">{{fmt.formatNum(userInfo.count.likes)}} 喜欢</text>
+        <text class="art">{{userInfo.count.artCount}} 作品</text>
+      </view>
+    </view>
+    <view class="focus" wx:if="{{userInfo.userId !== loginUser}}">
+      <OpButton
+        class="btn"
+        text="{{userInfo.isFocus ? '已关注':'关注'}}"
+        btnStyle="{{userInfo.isFocus ? 'white':''}}"
+        width="130rpx"
+        bind:click="handleFocusUser"
+        login
+      ></OpButton>
+    </view>
+  </view>
+  <!-- 作品展示 -->
+  <view class="body">
+    <view class="art-wrapper">
+      <block wx:for="{{userInfo.artworks}}" wx:key="artworkId">
+        <SquareArtwork artwork="{{item}}" wx:if="{{index < 3}}"></SquareArtwork>
+      </block>
+    </view>
+  </view>
+</view>

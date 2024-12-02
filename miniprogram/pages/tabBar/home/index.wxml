@@ -1,0 +1,82 @@
+<!--pages/home/index.wxml-->
+<!-- 导航栏 -->
+<van-nav-bar
+  fixed
+  placeholder
+  z-index="999"
+  custom-class="custom-nav-class"
+  border="{{false}}"
+>
+  <view slot="left" class="nav-bar-left">
+    <Tabs
+      tabs="{{tabs}}"
+      bind:click="handleNavBarChose"
+      bottomLineWidth="{{35}}"
+      scrollable="{{false}}"
+      choseIndex="{{1}}"
+    ></Tabs>
+  </view>
+</van-nav-bar>
+
+<scroll-view
+  wx:if="{{!networkError}}"
+  id="scrollview"
+  style="height: {{scrollViewHight}}px;background-color: {{choseNav ==='discover'?'':'var(--bgc1)'}};"
+  bindrefresherrefresh="handleScrollViewRefresh"
+  bind:scrolltolower="getShowData"
+  refresher-enabled
+  refresher-triggered="{{isRefresh}}"
+  scroll-y
+  enhanced
+  refresher-threshold="80"
+  refresher-default-style="none"
+  show-scrollbar="{{false}}"
+>
+  <view slot="refresher" class="loading">
+    <van-loading color="var(--text-color2)" size="30rpx" />
+  </view>
+
+  <WaterFlow id="waterFlow" wx:if="{{choseNav ==='discover'}}"></WaterFlow>
+  <view wx:else>
+    <block wx:for="{{feeds}}" wx:key="trendId">
+      <TrendItem trend="{{item}}"></TrendItem>
+    </block>
+    <van-notice-bar
+      wx:if="{{recommendUser.length}}"
+      color="#1989fa"
+      background="#ecf9ff"
+      text="你还没有关注过画师哦，看看有没有喜欢的画师吧～"
+    />
+    <block wx:for="{{recommendUser}}" wx:key="userId" wx:if="{{!feeds.length}}">
+      <UserCard userInfo="{{item}}" loginUser="{{userId}}"></UserCard>
+    </block>
+  </view>
+
+  <view class="loading" wx:if="{{loading }}">
+    <van-loading color="var(--text-color2)" size="30rpx" />
+  </view>
+  <view wx:if="{{feedEnd && !recommendUser.length}}" class="end">
+    - The End -
+  </view>
+  <view
+    class="refresh-user"
+    wx:if="{{recommendUser.length && choseNav ==='focus'}}"
+    bind:tap="getRecommendUserAction"
+  >
+    换一换
+  </view>
+</scroll-view>
+
+<!-- 网络请求错误提示 -->
+<view class="networkerror" wx:else>
+  <view style="margin-top: 20rpx">糟糕出错了... (⋟﹏⋞) </view>
+  <OpButton
+    style="margin-top: 40rpx"
+    height="70rpx"
+    text="重试"
+    bind:click="handleScrollViewRefresh"
+  ></OpButton>
+</view>
+
+<!-- 上传作品 -->
+<FixButton btnType="upload"></FixButton>

@@ -1,0 +1,72 @@
+<!--pages/login/wx-login/index.wxml-->
+<view class="logo-slogan">
+  <image class="logo" src="{{logoUrl}}" mode="aspectFill" />
+  <view class="slogan">为绘画梦想助力</view>
+</view>
+
+<view class="handle">
+  <OpButton
+    style="margin-bottom: 25rpx"
+    width="500rpx"
+    fontSize="32rpx"
+    height="100rpx"
+    text="快捷登录"
+    bind:click="onAgreeTipShow"
+  ></OpButton>
+  <OpButton
+    width="500rpx"
+    height="100rpx"
+    fontSize="32rpx"
+    text="已有账号，手机号登陆"
+    btnStyle="white"
+    bind:click="handleOtherPhoneLogin"
+  ></OpButton>
+</view>
+
+<!-- 获取手机号前先询问是否同意协议 -->
+<van-popup
+  show="{{ showAgreeTip }}"
+  position="bottom"
+  round
+  closeable
+  bind:close="onAgreeTipClose"
+>
+  <view class="no-check-tip">
+    <view class="title">手机号授权</view>
+    <view class="agreement">
+      <text class="text"
+        >欢迎使用纸上小程序，为了更好地保障您的合法权益，请仔细阅读并同意</text
+      >
+      <text bind:tap="handleToAgreeWebSite" data-value="user"
+        >《用户协议》</text
+      >
+      <text bind:tap="handleToAgreeWebSite" data-value="privacy"
+        >《隐私协议》</text
+      >
+    </view>
+    <view class="btn-wrap">
+      <OpButton
+        class="btn"
+        width="100%"
+        height="100rpx"
+        fontSize="32rpx"
+        btnStyle="white"
+        bgcColor="#f2f2f2"
+        text="不同意"
+        bind:click="onAgreeTipClose"
+      ></OpButton>
+      <OpButton
+        class="btn"
+        width="100%"
+        height="100rpx"
+        fontSize="32rpx"
+        text="同意并获取"
+        openType="getPhoneNumber"
+        bind:phoneCode="handleWxPhoneLogin"
+      ></OpButton
+    ></view>
+  </view>
+</van-popup>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

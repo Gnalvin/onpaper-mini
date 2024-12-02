@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "Tabs": "/components/tabs",
+    "SquareArtwork": "/components/artwork/square",
+    "van-loading": "@vant/weapp/loading/index",
+    "van-sticky": "@vant/weapp/sticky/index"
+  },
+  "navigationBarTitleText": "分区"
+}

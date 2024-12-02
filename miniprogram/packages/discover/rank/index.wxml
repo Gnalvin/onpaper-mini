@@ -1,0 +1,72 @@
+<!--packages/discover/rank/index.wxml-->
+
+<!-- 导航栏 -->
+<van-nav-bar
+  fixed
+  placeholder
+  z-index="999"
+  custom-class="custom-nav-class"
+  border="{{false}}"
+>
+  <view slot="left" class="nav-bar-left">
+    <view class="back">
+      <image
+        class="icon"
+        src="/assets/img/arrow_left.svg"
+        mode="aspectFill"
+        bind:tap="navGoBack"
+        wx:if="{{pagesCount > 1}}"
+      />
+      <image
+        wx:else
+        class="home-icon"
+        src="/assets/img/home.svg"
+        mode="aspectFill"
+        bind:tap="navGoBack"
+      />
+    </view>
+  </view>
+  <view slot="title" class="nav-bar-title">
+    <view
+      class="item {{choseNav == 'art'?'active' : ''}}"
+      data-text="art"
+      bind:tap="onNavClick"
+    >
+      作品
+    </view>
+    <view
+      class="item {{choseNav == 'user'?'active' : ''}}"
+      data-text="user"
+      bind:tap="onNavClick"
+    >
+      画师
+    </view>
+  </view>
+</van-nav-bar>
+
+<!-- tabs -->
+<!-- vant-bar 高度加上 状态栏高度 -->
+<van-sticky offset-top="{{ statusBarHeight + 46 }}">
+  <view class="tabs">
+    <Tabs tabs="{{tabs}}" bind:click="onTabClick"></Tabs>
+  </view>
+</van-sticky>
+
+<van-notice-bar color="#1989fa" background="#ecf9ff" text="{{tip}}" />
+
+<!-- 展示区 -->
+<view class="art-wrap" wx:if="{{artworks.length}}">
+  <block wx:for="{{artworks}}" wx:key="artworkId">
+    <SquareArtwork artwork="{{item}}" rank="{{index + 1}}"></SquareArtwork>
+  </block>
+</view>
+
+<view class="user-warp" wx:if="{{users.length}}">
+  <block wx:for="{{users}}" wx:key="userId">
+    <UserCard userInfo="{{item}}" loginUser="{{loginUser}}"></UserCard>
+  </block>
+</view>
+
+<view class="loading" wx:if="{{loading}}">
+  <van-loading color="var(--text-color2)" size="30rpx" />
+</view>

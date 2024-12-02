@@ -1,0 +1,120 @@
+<!--packages/chat-detail/index.wxml-->
+<view id="chatPage">
+  <view class="scroll-wrapper">
+    <scroll-view
+      scroll-y
+      style="height: {{scrollViewHight}}px;"
+      bindscrolltolower="getMessageRecordAction"
+      enhanced
+      show-scrollbar="{{false}}"
+    >
+      <view class="list-wrapper">
+        <block wx:for="{{chatRecords}}" wx:key="msgId">
+          <!-- 聊天记录 -->
+          <view class="message">
+            <view class="time" wx:if="{{item.showTime}}"
+              >{{ item.showTime }}</view
+            >
+            <view
+              class="msg-body {{ sender.userId === item.sender ? 'msg-reverse' : '' }}"
+            >
+              <Avatar
+                style="display: flex"
+                avatarName="{{ sender.userId === item.sender ? sender.avatar : receiver.avatar}}"
+                uid="{{sender.userId === item.sender ? sender.userId : receiver.userId}}"
+                width="90rpx"
+              ></Avatar>
+              <view class="text" wx:if="{{item.msgType == 'text'}}"
+                >{{ item.content }}</view
+              >
+              <view class="img-wrap" wx:elif="{{item.msgType == 'pic'}}">
+                <van-icon
+                  class="fail"
+                  wx:if="{{item.uploadFail}}"
+                  name="warning"
+                  color="#fc638c"
+                  size="20px"
+                />
+                <imageItem
+                  image-class="img"
+                  src="{{item.content}}"
+                  mode="aspectFill"
+                  style="width: {{item.width}};height: {{item.height}};"
+                  bind:tap="handlePreviewPic"
+                  data-url="{{item.content}}"
+                ></imageItem>
+                <view
+                  class="uploading"
+                  wx:if="{{item.uploading && !item.uploadFail}}"
+                >
+                  <van-loading size="40rpx" color="#eee"></van-loading>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 输入框 -->
+  <view
+    id="input"
+    class="input-wrapper"
+    style="height: {{!!text ?'auto':'35px'}};"
+  >
+    <view
+      bind:tap="focus"
+      class="width-transition"
+      style="width: {{!!text ? '570rpx' : '690rpx'}};"
+    >
+      <view class="input-bgc">
+        <textarea
+          value="{{text}}"
+          class="textarea"
+          auto-height
+          maxlength="400"
+          bindfocus="handleInputFocus"
+          bindblur="handleInputBlur"
+          bindinput="handleInput"
+          bindlinechange="handleGoToKeyBoardTop"
+          adjust-position="{{false}}"
+          disable-default-padding
+          placeholder="{{tipMsg}}"
+          disabled="{{!!tipMsg || noReceiveMsg}}"
+          show-confirm-bar="{{false}}"
+        ></textarea>
+      </view>
+      <view class="chose-img" catch:tap="handleUploadImg">
+        <image
+          class="icon"
+          src="/assets/img/picture-one.svg"
+          mode="aspectFill"
+        />
+      </view>
+    </view>
+    <view class="btn-transition">
+      <van-transition
+        show="{{ !!text }}"
+        name="slide-right"
+        duration="{{ { enter: 400, leave: 300 } }}"
+      >
+        <OpButton
+          style="display: flex; margin-left: 20rpx"
+          text="发送"
+          width="100rpx"
+          height="60rpx"
+          bind:click="handleSendMessage"
+        ></OpButton
+      ></van-transition>
+    </view>
+  </view>
+  <!-- 辅助定位元素 -->
+  <view id="bottomFlag"></view>
+  <view
+    class="{{isFocus ? '':'tempHight'}}"
+    style="height: {{keyboardHeight + safeBottomHight}}px;"
+  ></view>
+</view>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

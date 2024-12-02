@@ -1,0 +1,112 @@
+<view class="phone-login-page">
+  <view class="body">
+    <view class="form">
+      <view class="phone-number">
+        <view class="zone">+86</view>
+        <input
+          class="input"
+          type="number"
+          maxlength="13"
+          value="{{phone}}"
+          placeholder="请输入手机号"
+          autocomplete="off"
+          placeholder-class="placeholder"
+          bindinput="handlePhoneInput"
+        />
+        <!-- 清空账号icon -->
+        <image
+          bind:tap="clearAccount"
+          wx:if="{{showClearAccount}}"
+          class="icon"
+          src="../../../assets/img/close-fill.svg"
+          mode="aspectFill"
+        />
+      </view>
+      <view class="code">
+        <input
+          class="input"
+          type="number"
+          value="{{code}}"
+          maxlength="6"
+          placeholder="请输入验证码"
+          autocomplete="off"
+          placeholder-class="placeholder"
+          bindinput="handleCodeInput"
+        />
+        <view
+          wx:if="{{!showCountDown}}"
+          class="send-code {{canSend ? 'active-color':''}}"
+          bind:tap="handleSendCode"
+        >
+          发送验证码
+        </view>
+        <view wx:else class="retry">重新发送({{countDown}}s)</view>
+      </view>
+    </view>
+    <OpButton
+      width="100%"
+      height="100rpx"
+      fontSize="32rpx"
+      text="登陆"
+      bind:click="handleLogin"
+      isDisable="{{!showLoginBtn}}"
+    ></OpButton>
+    <!-- 是否同意协议 -->
+    <view class="agreement">
+      <view class="checkbox">
+        <van-checkbox
+          icon-size="26rpx"
+          value="{{ checked }}"
+          bind:change="onChangeChecked"
+        >
+          我已阅读并同意
+        </van-checkbox>
+      </view>
+      <view>
+        <text class="text" bind:tap="handleToAgreeWebSite" data-value="user"
+          >《用户协议》</text
+        >及<text
+          class="text"
+          bind:tap="handleToAgreeWebSite"
+          data-value="privacy"
+          >《隐私协议》</text
+        >
+      </view>
+    </view>
+  </view>
+  <view class="footer">
+    <OtherLogin showList="{{['wechat','email']}}"></OtherLogin>
+    <view class="tip">若手机号未注册将自动新建账号</view>
+  </view>
+</view>
+
+<!-- 如果没有同意协议弹出提示 -->
+<van-popup
+  show="{{ showAgreeTip }}"
+  position="bottom"
+  round
+  closeable
+  bind:close="onAgreeTipClose"
+>
+  <view class="no-check-tip">
+    <view class="title">请阅读并同意以下条款</view>
+    <view class="text">
+      <text bind:tap="handleToAgreeWebSite" data-value="user"
+        >《用户协议》</text
+      >
+      <text bind:tap="handleToAgreeWebSite" data-value="privacy"
+        >《隐私协议》</text
+      >
+    </view>
+    <OpButton
+      width="100%"
+      height="100rpx"
+      fontSize="32rpx"
+      text="同意并继续"
+      bind:click="handleAgreeTipLogin"
+    ></OpButton>
+  </view>
+</van-popup>
+
+<!-- 错误提示 -->
+<van-toast id="van-toast" />

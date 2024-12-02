@@ -1,0 +1,144 @@
+<!--packages/notify/index.wxml-->
+<wxs src="./format.wxs" module="fmt" />
+
+<view class="notify" wx:if="{{notifyType}}">
+  <view class="notify-body" wx:for="{{notifys}}" wx:key="notifyId">
+    <view class="body">
+      <view class="message" bind:tap="goToContentDeatil" data-notify="{{item}}">
+        <view class="avatar-icon">
+          <Avatar
+            style="display: flex"
+            avatarName="{{item.sender.avatar ? item.sender.avatar : ''}}"
+            uid="{{item.sender.userId ? item.sender.userId : ''}}"
+            width="90rpx"
+          ></Avatar>
+          <image
+            wx:if="{{item.action == 'like'}}"
+            class="icon"
+            src="/assets/img/like_active.svg"
+            mode="aspectFill"
+          />
+          <image
+            wx:if="{{item.action == 'collect'}}"
+            class="icon"
+            src="/assets/img/collect_active.svg"
+            mode="aspectFill"
+          />
+        </view>
+        <view class="name-action-time">
+          <view class="username one-line">
+            <text data-uid="{{item.sender.userId}}" catch:tap="goToUserHome"
+              >{{item.sender.userName}}</text
+            >
+          </view>
+          <view class="action-time">
+            <view class="action">
+              {{
+              fmt.handleActionText(item.action,item.targetType,item.content.status)
+              }}{{fmt.handleTargetType(item.targetType) }}
+            </view>
+            <view class="time"> {{ item.updateAt }} </view>
+          </view>
+        </view>
+      </view>
+      <view class="handle">
+        <view class="focus" wx:if="{{item.action == 'focus'}}">
+          <OpButton
+            text="{{ item.content.isFocus == 0 ? '回粉' : '相互关注' }}"
+            btnStyle="{{item.content.isFocus ? 'white':''}}"
+            bgcColor="{{item.content.isFocus ? '#f5f5f5' :'#dfebfd'}}"
+            color="{{item.content.isFocus ? '' :'var( --primary-color)'}}"
+            width="140rpx"
+            bind:click="handleFocusUser"
+            data-notify="{{item}}"
+            login
+          ></OpButton>
+        </view>
+        <view class="img-wrap" wx:else>
+          <image
+            catch:tap="handleClickCover"
+            data-notify="{{item}}"
+            class="img"
+            lazy-load
+            wx:if="{{item.content.cover}}"
+            src="{{item.content.cover}}"
+            mode="aspectFill"
+          />
+        </view>
+      </view>
+    </view>
+    <view
+      class="other-info"
+      wx:if="{{item.content}}"
+      data-notify="{{item}}"
+      bind:tap="goToContentDeatil"
+    >
+      <view class="trend-text" wx:if="{{item.content.text}}">
+        <view class="my-text"> {{ item.content.text }} </view>
+      </view>
+      <view class="like-comment" wx:if="{{item.content.beLikeContent}}">
+        <view class="my-text"> {{ item.content.beLikeContent }} </view>
+      </view>
+      <view class="comment" wx:if="{{item.action == 'comment'}}">
+        <view class="sender-text"> {{ item.content.sendContent }} </view>
+        <view class="my-text" wx:if="{{item.content.beReplyContent}}">
+          {{ item.content.beReplyContent }}
+        </view>
+        <view class="reply-like" wx:if="{{!item.content.sendIsDel}}">
+          <view
+            class="reply"
+            data-notify="{{item}}"
+            catch:tap="handleReplyComment"
+          >
+            回复评论
+          </view>
+          <view
+            class="like"
+            catch:tap="handleLikeComment"
+            data-notify="{{item}}"
+          >
+            <image
+              class="icon"
+              wx:if="{{item.content.isLike}}"
+              src="/assets/img/like_active.svg"
+              mode="aspectFill"
+            />
+            <image
+              class="icon"
+              wx:else
+              src="/assets/img/like_normal.svg"
+              mode="aspectFill"
+            />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="zero-msg" wx:if="{{zeroMsg}}">
+    {{fmt.handleZeroMsgTip(notifyType)}}
+  </view>
+  <!-- 大于五条消息时 如果没有更多了 显示提示 -->
+  <view wx:if="{{isEnd && notifys.length >= 5}}" class="end">
+    - The End -
+  </view>
+  <view wx:elif="{{!isEnd}}" class="loading">
+    <van-loading color="var(--text-color2)" size="30rpx" />
+  </view>
+</view>
+
+<!-- 评论输入框 -->
+<CommentInput
+  wx:if="{{isShowCommentInput}}"
+  id="comment-input"
+  placeholder="回复 @{{commentInfo.replyUserName}}"
+  isInDetailPage="{{true}}"
+  ownId="{{commentInfo.ownId}}"
+  replyUserId="{{commentInfo.replyUserId}}"
+  ownType="{{commentInfo.ownType}}"
+  rootId="{{commentInfo.rootId}}"
+  bind:blur="handleCloseCommentInput"
+  bind:success="handleCommentSuccess"
+></CommentInput>
+
+<!-- 消息提示 -->
+<van-toast id="van-toast" />
